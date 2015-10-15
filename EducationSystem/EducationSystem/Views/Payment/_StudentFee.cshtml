@@ -1,0 +1,191 @@
+﻿<div class="modal fade" id="student-fee-detail-modal">
+    <input type="hidden" id="action-type" value="add" class="" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">student fee Detail for <span id="student_name_header">  </span></h4>
+            </div>
+            <form id="student-fee_detail_form" class="validate">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-1" class="control-label">student fee Name</label>
+                                <input type="text" class="form-control" name="student_fee_name" id="student_fee_name" placeholder="student-fee name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-1" class="control-label">student fee Name</label>
+                                <input type="text" class="form-control" name="student_fee_name" id="student_fee_name" placeholder="student-fee name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-1" class="control-label">student fee Name</label>
+                                <input type="text" class="form-control" name="student_fee_name" id="student_fee_name" placeholder="student-fee name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" id="save-changes-id">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+        $('#student-fee-detail-modal').on('hidden.bs.modal', function () {
+            $('#student_fee_name').val("");
+            $('#student-fee_teacher').val("");
+            //$('#student-fee_school').val("");
+            $('#student-fee_class').val("");
+        })
+
+        $("select.student-fee-action-type").change(function () {
+            var action = $(this).val();
+            if (action === "edit") {
+
+                $("#action-type").val("edit");
+                $("#action-type").addClass($(this).attr("id"));
+
+                $.ajax({
+                    url: "/Payment/FindFee",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $('#student_fee_name').val(response.name);
+                            $('#student-fee_class').val(response.class_id);
+                            //$('#student-fee_school').val(response.school_id);
+                            $('#student-fee_teacher').val(response.teacher_id);
+                            jQuery('#student-fee-detail-modal').modal('show', { backdrop: 'static' });
+                        }
+                    }
+                });
+            }
+            else if (action == "delete") {
+                $("#action-type").addClass($(this).attr("id"));
+                $.ajax({
+                    url: "/student-fee/Delete",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            window.location.href = "/";
+                        }
+                    }
+                });
+            }
+        });
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#student-fee_detail_form").validate({
+            rules: {
+                student_fee_name: {
+                    required: true
+                },
+                student-fee_teacher: {
+                    required: true
+                },
+                student-fee_class: {
+                    required: true
+                },
+                //student-fee_school: {
+                //    required: true
+                //}
+            },
+
+            messages: {
+                student_fee_name: {
+                    required: 'Required student-fee name'
+                },
+                student-fee_teacher: {
+                    required: 'Required student-fee teacher'
+                },
+                //student-fee_school: {
+                //    required: 'Required student-fee school'
+                //},
+                student-fee_class: {
+                    required: 'Required student-fee class'
+                }
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var action = $("#action-type").val();
+
+                var data = {
+                    name: $(form).find('#student_fee_name').val(),
+                    class_id: $(form).find('#student-fee_class').val(),
+                    school: $(form).find('#student-fee_school').val(),
+                    teacher: $(form).find('#student-fee_teacher').val()
+                };
+
+                var url = "/student-fee/";
+                if (action == "add") {
+                    url += "Add";
+                }
+                else if (action == "edit") {
+                    url += "Update";
+                    data.id = $("#action-type").attr("class");
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (resp) {
+                                    window.location.href = '/';
+                                }
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>
+
+

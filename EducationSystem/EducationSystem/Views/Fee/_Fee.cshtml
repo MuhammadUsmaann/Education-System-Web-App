@@ -1,0 +1,96 @@
+﻿
+
+<div class="modal fade" id="fee-modal-detail">
+
+    <input type="hidden" id="action-type" value="add" class="" />
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@EducationSystem.Models.SessionHandler.GetShoolName()'s Class Detail</h4>
+            </div>
+               
+                    @using (Ajax.BeginForm("update", "Fee", null, new AjaxOptions
+                                                                            {
+                                                                                HttpMethod = "post",
+                                                                                OnSuccess = "Success",
+                                                                                OnBegin = "Begin",
+                                                                                OnFailure = "Failure",
+                                                                                OnComplete = "Complete"
+                                                                            }))
+{
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="student_roll">Admission Fee</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="AdmissionFee" id="ad_fee" placeholder="Admission Fee">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="student_roll">Examination Fee</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="ExaminationFee" id="ex_fee" placeholder="Admission Fee">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="student_roll">Other Charges</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="OtherCharges" id="ch_fee" placeholder="Admission Fee">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-info" value="Save changes" />
+    </div>
+}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        
+        $("#fee-modal-btn").click(function () {
+            $("#action-type").val("edit");
+            $("#action-type").addClass($(this).attr("id"));
+            $.ajax({
+                url: "/fee/find",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id: $(this).attr("id")
+                },
+                success: function (response) {
+                    if (response) {
+                        $('#ad_fee').val(response.AdmissionFee);
+                        $('#ex_fee').val(response.ExaminationFee);
+                        $('#ch_fee').val(response.OtherCharges);
+                        jQuery('#fee-modal-detail').modal('show', { backdrop: 'static' });
+                    }
+                }
+            });
+        });
+    });
+
+    function Success(data) {
+        location.reload();
+    }
+    function Begin() {
+
+    }
+    function Complete() {
+
+    }
+</script>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

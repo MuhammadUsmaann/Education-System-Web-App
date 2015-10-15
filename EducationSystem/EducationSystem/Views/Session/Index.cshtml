@@ -1,0 +1,136 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.Session>
+
+<div class="page-title">
+    <div class="title-env">
+        <h1 class="title">Session </h1>
+        <p class="description">The Session detail can modify here</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h3 class="panel-title">Schedual Dates</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="javascript:;" id="session-modal-btn" class="btn ">Add Session</a>
+                        <a href="#" data-toggle="modal" data-target="#deleteModal" class="btn">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped" id="table-format-default">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="cbr" /></th>
+                            <th>Sr#</th>
+                            <th>Statr date</th>
+                            <th>End Date</th>
+                            <th>Default</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="middle-align">
+                        @{
+                            var count = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" value="@item.session_id" class="cbr session_identity" />
+                                </td>
+                                <td>@count</td>
+                                <td>
+                                    @Html.DisplayFor(m => item.start_date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.end_date)
+                                </td>
+                                <td>
+                                    @{
+                            var isDefault = "No";
+                                    }
+                                    @if(item.isDefault == EducationSystem.Models.ActiveStatus.ACTIVE)
+                                    {
+                                        isDefault = "Yes";
+                                    }
+                                    @isDefault
+                                </td>
+                                <td>
+                                    <a href="javascript:;" id="@item.session_id" class="make-default-btn">Make Default</a>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section modals{
+    @Html.Partial("~/Views/Session/_date.cshtml", null)
+   
+
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Parent Detail</h4>
+            </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Are you sure want to delete selected Values with this all related data will also delete</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" id="delecte-modal-id">Delete</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $(document).ready(function () {
+            $(".make-default-btn").click(function () {
+                var id = $(this).attr("id");
+
+
+                ajaxCall("/session/default", {id:id}, function (response) {
+                    if (response) {
+                        window.location.href = '/session';
+                    }
+                });
+            });
+            $("#delecte-modal-id").click(function () {
+
+                var values = $(".session_identity");
+                var ids = [];
+                $.each(values, function (index, value) {
+
+                    if ($(value).is(':checked')) {
+                        ids.push($(value).val());
+                    }
+                });
+                if (ids.length > 0) {
+                    ajaxCall('/session/delete', { ids: ids }, function (data) {
+                        window.location.href = '/session';
+                    });
+                }
+                else {
+                    alert("Select any to delete");
+                }
+            });
+        })
+    </script>
+}

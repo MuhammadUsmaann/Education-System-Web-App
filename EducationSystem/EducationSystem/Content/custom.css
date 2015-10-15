@@ -1,0 +1,76 @@
+/**
+ *
+ * Apply your custom CSS here
+ *
+*/
+
+body {	
+}
+
+a {
+}
+.modal-content .error {
+    border-color:#cc3f44;
+    color:#cc3f44;
+}
+.validate .error {
+    border-color:#cc3f44;
+    color:#cc3f44;  
+}
+.datepicker{z-index:9999 !important;}
+.pagination {
+    float:right !important;
+    margin:0 !important;
+}
+.dataTables_filter label{
+    float:right !important;
+}
+.dataTables_paginate {
+    padding:0 !important;
+}
+.glyphicon-minus{
+    font-size:10px;
+}
+.glyphicon-remove{
+    color:red;
+}
+.glyphicon-ok{
+    color:green;
+}
+
+
+
+
+
+
+/**
+    For Attendance Table Non Responsive 
+*/
+
+
+.table-bordered{
+    font-size: 10px;
+}
+.table-bordered th.name, td.name {
+    word-wrap: break-word;
+    max-width: 120px;
+    padding: 2px;
+    min-width: 120px;
+    height:10px;
+    font-weight:bold;
+}
+.table-bordered td.day , th.day{
+    max-width : 23px;
+    min-width : 23px;
+    padding: 2px !important;
+}
+
+
+.atttendance-table-div{
+    overflow-x:auto;
+    height:auto;
+}
+.std-save-btn{
+    float:right;
+    margin-right:0px !important;
+}

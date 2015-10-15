@@ -1,0 +1,264 @@
+﻿
+<div class="modal fade" id="parent-detail-modal">
+
+    <input type="hidden" id="action-type" value="add" class=""/>
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Parent Detail</h4>
+			</div>
+            <form id="parent_detail_form" class="validate"> 
+			<div class="modal-body">
+				<div class="row">
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">First Name</label>
+                            <input type="text" class="form-control" name="parent_fname" id="parent_fname" placeholder="parent first name">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Last Name</label>
+                            <input type="text" class="form-control" name="parent_lname" id="parent_lname" placeholder="parent last name">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Profession</label>
+                            <input type="text" class="form-control" id="parent_profession" name="parent_profession" placeholder="Profession">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Phone</label>
+                            <input type="text" class="form-control" name="parent_phone" id="parent_phone" placeholder="Phone">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="field-3" class="control-label">Email</label>
+							<input type="email" class="form-control"  name="parent_email" id="parent_email" placeholder="Email">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-3" class="control-label">Password</label>
+							<input type="password" class="form-control"  name="parent_password" id="parent_password" placeholder="Password">
+						</div>
+					</div>
+				</div>
+               
+                <div class="row">
+                    <div class="col-md-12">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Address</label>
+                            <input type="text" class="form-control" name="parent_address" id="parent_address" placeholder="Address">
+						</div>
+					</div>
+                </div>
+			</div>
+				
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-info" id="save-changes-id">Save changes</button>
+			</div>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#parent-modal-btn").click(function () {
+            $("#action-type").val("add");
+            jQuery('#parent-detail-modal').modal('show', { backdrop: 'static' });
+        });
+        $('#parent-detail-modal').on('hidden.bs.modal', function () {
+            $('#parent_fname').val("");
+            $('#parent_lname').val("");
+            $('#parent_profession').val("");
+            $('#parent_address').val("");
+            $('#parent_phone').val("");
+            $('#parent_email').val("");//.prop("readonly", false);
+            $('#parent_password').val("");
+        })
+
+        $("select.parent-action-type").change(function () {
+            var action = $(this).val();
+            if (action === "edit") {
+
+                $("#action-type").val("edit");
+                $("#action-type").addClass($(this).attr("id"));
+
+                $.ajax({
+                    url: "/Parent/Find",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $('#parent_fname').val(response.first_name);
+                            $('#parent_lname').val(response.last_name);
+                            $('#parent_profession').val(response.birthday);
+                            $('#parent_address').val(response.address);
+                            $('#parent_phone').val(response.phone);
+                            $('#parent_school').val(response.school_id);
+                            $('#parent_password').val(response.password);
+                            $('#parent_email').val(response.username);//.prop("readonly", true);
+                            jQuery('#parent-detail-modal').modal('show', { backdrop: 'static' });
+                        }
+                    }
+                });
+            }
+            else if (action == "delete") {
+                $("#action-type").addClass($(this).attr("id"));
+                $.ajax({
+                    url: "/Parent/Delete",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            window.location.href = "/parent";
+                        }
+                    }
+                });
+            }
+        });
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#parent_detail_form").validate({
+            rules: {
+                parent_fname: {
+                    required: true
+                },
+                parent_lname: {
+                    required: true
+                },
+                parent_profession: {
+                    required: true
+                },
+
+                //parent_address: {
+                //    required: true
+                //},
+                parent_phone: {
+                    required: true
+                },
+                parent_email: {
+                    required: true
+                },
+                parent_password: {
+                    required: true
+                },
+                parent_school: {
+                    required: true
+                }
+            },
+
+            messages: {
+                parent_fname: {
+                    required: 'Required parent first name'
+                },
+                parent_lname: {
+                    required: 'Required parent last name'
+                },
+                parent_profession: {
+                    required: 'Required parent address'
+                },
+                parent_phone: {
+                    required: 'Required parent contact number'
+                },
+                parent_email: {
+                    required: 'Required parent email '
+                },
+                parent_password: {
+                    required: 'Required parent password'
+                },
+                parent_school: {
+                    required: 'Required school'
+                }
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var action = $("#action-type").val();
+
+                var data = {
+                    fname: $(form).find('#parent_fname').val(),
+                    lname: $(form).find('#parent_lname').val(),
+                    profession: $(form).find('#parent_profession').val(),
+                    address: $(form).find('#parent_address').val(),
+                    phone: $(form).find('#parent_phone').val(),
+                    username: $(form).find('#parent_email').val(),
+                    school_id: $(form).find('#parent_school').val(),
+                    password: $(form).find('#parent_password').val(),
+                };
+
+                var url = "/Parent/";
+                if (action == "add") {
+                    url += "Add";
+                }
+                else if (action == "edit") {
+                    url += "Update";
+                    data.id = $("#action-type").attr("class");
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (!resp)
+                                {
+                                    alert("This username already existed");
+                                }
+                                else {
+                                    window.location.href = '/parent';
+                                }
+
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>
+

@@ -1,0 +1,162 @@
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csprojResolveAssemblyReference.cache
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EducationSystem.dll.config
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EducationSystem.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EducationSystem.pdb
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Antlr3.Runtime.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Dapper.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EntityFramework.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EntityFramework.SqlServer.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Newtonsoft.Json.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Owin.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Helpers.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Mvc.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Optimization.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Razor.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.WebPages.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.WebPages.Razor.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\WebGrease.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Dapper.pdb
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Dapper.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Helpers.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Mvc.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Optimization.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.Razor.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.WebPages.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\System.Web.WebPages.Razor.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Antlr3.Runtime.pdb
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Newtonsoft.Json.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EntityFramework.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\EntityFramework.SqlServer.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\obj\Debug\EducationSystem.dll
+C:\Users\Muhammad Usman\Documents\Visual Studio 2013\Projects\EducationSystem\EducationSystem\obj\Debug\EducationSystem.pdb
+E:\work\Education System\EducationSystem\EducationSystem\bin\EducationSystem.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Antlr3.Runtime.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Dapper.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\EntityFramework.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\EntityFramework.SqlServer.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Core.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Cookies.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.OAuth.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Newtonsoft.Json.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Owin.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Helpers.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Mvc.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Optimization.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Razor.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.WebPages.Deployment.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.WebPages.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.WebPages.Razor.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\WebGrease.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\EducationSystem.dll.config
+E:\work\Education System\EducationSystem\EducationSystem\bin\EducationSystem.pdb
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Web.Infrastructure.dll
+E:\work\Education System\EducationSystem\EducationSystem\bin\Dapper.pdb
+E:\work\Education System\EducationSystem\EducationSystem\bin\Dapper.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Helpers.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Mvc.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Razor.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.WebPages.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.WebPages.Deployment.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.WebPages.Razor.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\System.Web.Optimization.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Antlr3.Runtime.pdb
+E:\work\Education System\EducationSystem\EducationSystem\bin\Newtonsoft.Json.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\EntityFramework.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\EntityFramework.SqlServer.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Core.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Cookies.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.OAuth.xml
+E:\work\Education System\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\work\Education System\EducationSystem\EducationSystem\obj\Debug\EducationSystem.dll
+E:\work\Education System\EducationSystem\EducationSystem\obj\Debug\EducationSystem.pdb
+E:\work\Education System\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csprojResolveAssemblyReference.cache
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EducationSystem.dll.config
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EducationSystem.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EducationSystem.pdb
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Antlr3.Runtime.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Dapper.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EntityFramework.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EntityFramework.SqlServer.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Web.Infrastructure.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Newtonsoft.Json.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Owin.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Helpers.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Mvc.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Optimization.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Razor.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.WebPages.Deployment.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.WebPages.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.WebPages.Razor.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\WebGrease.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Dapper.pdb
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Dapper.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Helpers.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Mvc.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Razor.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.WebPages.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.WebPages.Deployment.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.WebPages.Razor.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\System.Web.Optimization.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Antlr3.Runtime.pdb
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Newtonsoft.Json.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EntityFramework.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\EntityFramework.SqlServer.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\obj\Debug\EducationSystem.dll
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\obj\Debug\EducationSystem.pdb
+E:\Freelancing\Hamad\School\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csprojResolveAssemblyReference.cache

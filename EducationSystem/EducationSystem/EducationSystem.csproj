@@ -1,0 +1,779 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E74627D-FB07-4974-87BB-B158EE0D234F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EducationSystem</RootNamespace>
+    <AssemblyName>EducationSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
+    <Compile Include="Controllers\FeeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Filters\AuthorizeRole.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Configuarion.cs" />
+    <Compile Include="Models\DapperClasses\AttendanceDetails.cs" />
+    <Compile Include="Models\DapperClasses\ClassDetails.cs" />
+    <Compile Include="Models\DapperClasses\ExamDetails.cs" />
+    <Compile Include="Models\DapperClasses\FeeStructureDetail.cs" />
+    <Compile Include="Models\DapperClasses\LocationDetail.cs" />
+    <Compile Include="Models\DapperClasses\ParentDetails.cs" />
+    <Compile Include="Models\DapperClasses\SchoolDetails.cs" />
+    <Compile Include="Models\DapperClasses\SessionDetails.cs" />
+    <Compile Include="Models\DapperClasses\StudentDetails.cs" />
+    <Compile Include="Models\DapperClasses\StudentFeeDetails.cs" />
+    <Compile Include="Models\DapperClasses\SubjectDetails.cs" />
+    <Compile Include="Models\DapperClasses\TeacherDetail.cs" />
+    <Compile Include="Models\DBModel.cs" />
+    <Compile Include="Models\Entities\Attendance.cs" />
+    <Compile Include="Models\Entities\ChangePassword.cs" />
+    <Compile Include="Models\Entities\City.cs" />
+    <Compile Include="Models\Entities\Class.cs" />
+    <Compile Include="Models\Entities\ClassAttendance.cs" />
+    <Compile Include="Models\Entities\ClassesDates.cs" />
+    <Compile Include="Models\Entities\Country.cs" />
+    <Compile Include="Models\Entities\Exam.cs" />
+    <Compile Include="Models\Entities\FamilyFeeReport.cs" />
+    <Compile Include="Models\Entities\FeeStructure.cs" />
+    <Compile Include="Models\Entities\Parent.cs" />
+    <Compile Include="Models\Entities\Role.cs" />
+    <Compile Include="Models\Entities\School.cs" />
+    <Compile Include="Models\Entities\Session.cs" />
+    <Compile Include="Models\Entities\Student.cs" />
+    <Compile Include="Models\Entities\StudentFee.cs" />
+    <Compile Include="Models\Entities\Subject.cs" />
+    <Compile Include="Models\Entities\SubjectExam.cs" />
+    <Compile Include="Models\Entities\Teacher.cs" />
+    <Compile Include="Models\Entities\TotalStudentFeeDetail.cs" />
+    <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Models\Entities\Users_detail.cs" />
+    <Compile Include="Models\IMethods.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\SessionHandler.cs" />
+    <Compile Include="Models\Utils.cs" />
+    <Compile Include="Models\View\ParentModelView.cs" />
+    <Compile Include="Models\View\StudentModelView.cs" />
+    <Compile Include="Models\View\TeacherModelView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\fonts\elusive\css\animation.css" />
+    <Content Include="Content\fonts\elusive\css\elusive-codes.css" />
+    <Content Include="Content\fonts\elusive\css\elusive-embedded.css" />
+    <Content Include="Content\fonts\elusive\css\elusive-ie7-codes.css" />
+    <Content Include="Content\fonts\elusive\css\elusive-ie7.css" />
+    <Content Include="Content\fonts\elusive\css\elusive.css" />
+    <Content Include="Content\fonts\elusive\font\elusive.svg" />
+    <Content Include="Content\fonts\elusive\index.html" />
+    <Content Include="Content\fonts\fontawesome\css\font-awesome.css" />
+    <Content Include="Content\fonts\fontawesome\css\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\fontawesome\index.html" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons\index.html" />
+    <Content Include="Content\fonts\index.html" />
+    <Content Include="Content\fonts\linecons\css\animation.css" />
+    <Content Include="Content\fonts\linecons\css\linecons-codes.css" />
+    <Content Include="Content\fonts\linecons\css\linecons-embedded.css" />
+    <Content Include="Content\fonts\linecons\css\linecons-ie7-codes.css" />
+    <Content Include="Content\fonts\linecons\css\linecons-ie7.css" />
+    <Content Include="Content\fonts\linecons\css\linecons.css" />
+    <Content Include="Content\fonts\linecons\font\linecons.svg" />
+    <Content Include="Content\fonts\linecons\index.html" />
+    <Content Include="Content\fonts\meteocons\css\animation.css" />
+    <Content Include="Content\fonts\meteocons\css\meteocons-codes.css" />
+    <Content Include="Content\fonts\meteocons\css\meteocons-embedded.css" />
+    <Content Include="Content\fonts\meteocons\css\meteocons-ie7-codes.css" />
+    <Content Include="Content\fonts\meteocons\css\meteocons-ie7.css" />
+    <Content Include="Content\fonts\meteocons\css\meteocons.css" />
+    <Content Include="Content\fonts\meteocons\font\meteocons.svg" />
+    <Content Include="Content\fonts\meteocons\index.html" />
+    <Content Include="Content\xenon-components.css" />
+    <Content Include="Content\xenon-core.css" />
+    <Content Include="Content\xenon-forms.css" />
+    <Content Include="Content\xenon-skins.css" />
+    <Content Include="Content\xenon.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\album-image-full.jpg" />
+    <Content Include="Images\album-img-1.png" />
+    <Content Include="Images\album-img-2.png" />
+    <Content Include="Images\album-img-3.png" />
+    <Content Include="Images\album-img-4.png" />
+    <Content Include="Images\album-img-5.png" />
+    <Content Include="Images\album-img-6.png" />
+    <Content Include="Images\album-img-7.png" />
+    <Content Include="Images\album-img-8.png" />
+    <Content Include="Images\attach-1.png" />
+    <Content Include="Images\attach-2.png" />
+    <Content Include="Images\clouds.png" />
+    <Content Include="Images\eiffel.jpg" />
+    <Content Include="Images\image-1.jpg" />
+    <Content Include="Images\image-2.jpg" />
+    <Content Include="Images\image-3.jpg" />
+    <Content Include="Images\image-4.jpg" />
+    <Content Include="Images\image-5.jpg" />
+    <Content Include="Images\layouts\layout-horizontal-right-sidebar-collapsed.png" />
+    <Content Include="Images\layouts\layout-horizontal-right-sidebar.png" />
+    <Content Include="Images\layouts\layout-horizontal.png" />
+    <Content Include="Images\layouts\layout-sidebar-collapsed-horizontal.png" />
+    <Content Include="Images\layouts\layout-sidebar-collapsed.png" />
+    <Content Include="Images\layouts\layout-sidebar-horizontal.png" />
+    <Content Include="Images\layouts\layout-sidebar-right-collapsed.png" />
+    <Content Include="Images\layouts\layout-sidebar-right.png" />
+    <Content Include="Images\layouts\layout-sidebar.png" />
+    <Content Include="Images\logo%402x.png" />
+    <Content Include="Images\logo-collapsed%402x.png" />
+    <Content Include="Images\logo-collapsed.png" />
+    <Content Include="Images\logo-white-bg%402x.png" />
+    <Content Include="Images\logo-white-bg.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\news-image-widget-2.png" />
+    <Content Include="Images\news-image-widget-3.png" />
+    <Content Include="Images\news-image-widget-4.png" />
+    <Content Include="Images\news-image-widget.png" />
+    <Content Include="Images\notes-lines.png" />
+    <Content Include="Images\ok-white-full.png" />
+    <Content Include="Images\ok-white.png" />
+    <Content Include="Images\ok.png" />
+    <Content Include="Images\sample.jpg" />
+    <Content Include="Images\user-1.png" />
+    <Content Include="Images\user-2.png" />
+    <Content Include="Images\user-3.png" />
+    <Content Include="Images\user-4.png" />
+    <Content Include="Images\user-5.png" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\common.js" />
+    <Content Include="Scripts\Custom\dashboard.js" />
+    <Content Include="Scripts\datatables\css\jquery.dataTables.css" />
+    <Content Include="Scripts\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Scripts\datatables\dataTables.bootstrap.css" />
+    <Content Include="Scripts\datatables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\datatables\images\back_disabled.png" />
+    <Content Include="Scripts\datatables\images\back_enabled.png" />
+    <Content Include="Scripts\datatables\images\back_enabled_hover.png" />
+    <Content Include="Scripts\datatables\images\favicon.ico" />
+    <Content Include="Scripts\datatables\images\forward_disabled.png" />
+    <Content Include="Scripts\datatables\images\forward_enabled.png" />
+    <Content Include="Scripts\datatables\images\forward_enabled_hover.png" />
+    <Content Include="Scripts\datatables\images\sort_asc.png" />
+    <Content Include="Scripts\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\datatables\images\sort_both.png" />
+    <Content Include="Scripts\datatables\images\sort_desc.png" />
+    <Content Include="Scripts\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\datatables\index.html" />
+    <Content Include="Scripts\datatables\js\jquery.dataTables.js" />
+    <Content Include="Scripts\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\datatables\js\jquery.js" />
+    <Content Include="Scripts\datatables\tabletools\copy_csv_xls.swf" />
+    <Content Include="Scripts\datatables\tabletools\copy_csv_xls_pdf.swf" />
+    <Content Include="Scripts\datatables\tabletools\dataTables.tableTools.css" />
+    <Content Include="Scripts\datatables\tabletools\dataTables.tableTools.min.js" />
+    <Content Include="Scripts\datatables\yadcf\jquery.dataTables.yadcf.css" />
+    <Content Include="Scripts\datatables\yadcf\jquery.dataTables.yadcf.js" />
+    <Content Include="Scripts\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\datepicker\index.html" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.android.holo-dark.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.android.holo-light.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.common.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.dark.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.exporter.dark.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.exporter.light.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.ios.default.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.ios7.default.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.light.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.spa.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.win8.black.css" />
+    <Content Include="Scripts\devexpress-web-14.1\css\dx.win8.white.css" />
+    <Content Include="Scripts\devexpress-web-14.1\index.html" />
+    <Content Include="Scripts\devexpress-web-14.1\js\dx.chartjs.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\dx.chartjs.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\dx.exporter.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\dx.exporter.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\dx.webappjs.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\dx.webappjs.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\globalize.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\globalize.min.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\jquery-1.11.1.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\jquery-2.1.1.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\knockout-3.1.0.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\knockout-3.1.0.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\localization\dx.webappjs.de.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\localization\dx.webappjs.fr.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\localization\dx.webappjs.ja.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\localization\dx.webappjs.ru.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-core.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-core.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-framework.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-framework.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-charts.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-charts.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-core.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-core.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-gauges.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-gauges.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-rangeselector.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-rangeselector.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-sparklines.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-sparklines.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-vectormap.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-viz-vectormap.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-widgets-base.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-widgets-base.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-widgets-web.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\modules\dx.module-widgets-web.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-data\africa.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-data\canada.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-data\eurasia.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-data\europe.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-data\usa.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-data\world.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-utils\dx.vectormaputils.debug.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-utils\dx.vectormaputils.js" />
+    <Content Include="Scripts\devexpress-web-14.1\js\vectormap-utils\dx.vectormaputils.node.js" />
+    <Content Include="Scripts\devexpress-web-14.1\layouts\Desktop\DesktopLayout.css" />
+    <Content Include="Scripts\devexpress-web-14.1\layouts\Desktop\DesktopLayout.html" />
+    <Content Include="Scripts\devexpress-web-14.1\layouts\Desktop\DesktopLayout.js" />
+    <Content Include="Scripts\devexpress-web-14.1\layouts\Empty\EmptyLayout.css" />
+    <Content Include="Scripts\devexpress-web-14.1\layouts\Empty\EmptyLayout.html" />
+    <Content Include="Scripts\devexpress-web-14.1\layouts\Empty\EmptyLayout.js" />
+    <Content Include="Scripts\handlebars.min.js" />
+    <Content Include="Scripts\joinable.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-validate\additional-methods.js" />
+    <Content Include="Scripts\jquery-validate\additional-methods.min.js" />
+    <Content Include="Scripts\jquery-validate\index.html" />
+    <Content Include="Scripts\jquery-validate\jquery.validate.js" />
+    <Content Include="Scripts\jquery-validate\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ar.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ar.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_bg.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_bg.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ca.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ca.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_cs.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_cs.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_da.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_da.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_de.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_de.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_el.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_el.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_es.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_es.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_es_AR.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_es_AR.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_et.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_et.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_eu.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_eu.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_fa.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_fa.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_fi.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_fi.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_fr.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_fr.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_gl.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_gl.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_he.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_he.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_hr.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_hr.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_hu.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_hu.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_id.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_id.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_is.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_is.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_it.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_it.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ja.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ja.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ka.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ka.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_kk.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_kk.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ko.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ko.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_lt.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_lt.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_lv.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_lv.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_my.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_my.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_nl.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_nl.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_no.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_no.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_pl.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_pl.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_pt_BR.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_pt_BR.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_pt_PT.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_pt_PT.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ro.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ro.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ru.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_ru.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_si.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_si.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sk.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sk.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sl.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sl.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sr.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sr.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sr_lat.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sr_lat.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sv.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_sv.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_th.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_th.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_tj.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_tj.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_tr.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_tr.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_uk.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_uk.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_vi.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_vi.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_zh.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_zh.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_zh_TW.js" />
+    <Content Include="Scripts\jquery-validate\localization\messages_zh_TW.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_de.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_de.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_es_CL.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_es_CL.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_fi.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_fi.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_nl.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_nl.min.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_pt.js" />
+    <Content Include="Scripts\jquery-validate\localization\methods_pt.min.js" />
+    <Content Include="Scripts\jquery.mousewheel.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\resizeable.js" />
+    <Content Include="Scripts\select2\index.html" />
+    <Content Include="Scripts\select2\select2-bootstrap.css" />
+    <Content Include="Scripts\select2\select2-spinner.gif" />
+    <Content Include="Scripts\select2\select2.css" />
+    <Content Include="Scripts\select2\select2.js" />
+    <Content Include="Scripts\select2\select2.min.js" />
+    <Content Include="Scripts\select2\select2.png" />
+    <Content Include="Scripts\select2\select2x2.png" />
+    <Content Include="Scripts\select2\select2_locale_ar.js" />
+    <Content Include="Scripts\select2\select2_locale_az.js" />
+    <Content Include="Scripts\select2\select2_locale_bg.js" />
+    <Content Include="Scripts\select2\select2_locale_ca.js" />
+    <Content Include="Scripts\select2\select2_locale_cs.js" />
+    <Content Include="Scripts\select2\select2_locale_da.js" />
+    <Content Include="Scripts\select2\select2_locale_de.js" />
+    <Content Include="Scripts\select2\select2_locale_el.js" />
+    <Content Include="Scripts\select2\select2_locale_es.js" />
+    <Content Include="Scripts\select2\select2_locale_et.js" />
+    <Content Include="Scripts\select2\select2_locale_eu.js" />
+    <Content Include="Scripts\select2\select2_locale_fa.js" />
+    <Content Include="Scripts\select2\select2_locale_fi.js" />
+    <Content Include="Scripts\select2\select2_locale_fr.js" />
+    <Content Include="Scripts\select2\select2_locale_gl.js" />
+    <Content Include="Scripts\select2\select2_locale_he.js" />
+    <Content Include="Scripts\select2\select2_locale_hr.js" />
+    <Content Include="Scripts\select2\select2_locale_hu.js" />
+    <Content Include="Scripts\select2\select2_locale_id.js" />
+    <Content Include="Scripts\select2\select2_locale_is.js" />
+    <Content Include="Scripts\select2\select2_locale_it.js" />
+    <Content Include="Scripts\select2\select2_locale_ja.js" />
+    <Content Include="Scripts\select2\select2_locale_ka.js" />
+    <Content Include="Scripts\select2\select2_locale_ko.js" />
+    <Content Include="Scripts\select2\select2_locale_lt.js" />
+    <Content Include="Scripts\select2\select2_locale_lv.js" />
+    <Content Include="Scripts\select2\select2_locale_mk.js" />
+    <Content Include="Scripts\select2\select2_locale_ms.js" />
+    <Content Include="Scripts\select2\select2_locale_nl.js" />
+    <Content Include="Scripts\select2\select2_locale_no.js" />
+    <Content Include="Scripts\select2\select2_locale_pl.js" />
+    <Content Include="Scripts\select2\select2_locale_pt-BR.js" />
+    <Content Include="Scripts\select2\select2_locale_pt-PT.js" />
+    <Content Include="Scripts\select2\select2_locale_ro.js" />
+    <Content Include="Scripts\select2\select2_locale_rs.js" />
+    <Content Include="Scripts\select2\select2_locale_ru.js" />
+    <Content Include="Scripts\select2\select2_locale_sk.js" />
+    <Content Include="Scripts\select2\select2_locale_sv.js" />
+    <Content Include="Scripts\select2\select2_locale_th.js" />
+    <Content Include="Scripts\select2\select2_locale_tr.js" />
+    <Content Include="Scripts\select2\select2_locale_ug-CN.js" />
+    <Content Include="Scripts\select2\select2_locale_uk.js" />
+    <Content Include="Scripts\select2\select2_locale_vi.js" />
+    <Content Include="Scripts\select2\select2_locale_zh-CN.js" />
+    <Content Include="Scripts\select2\select2_locale_zh-TW.js" />
+    <Content Include="Scripts\selectboxit\index.html" />
+    <Content Include="Scripts\selectboxit\jquery.selectBoxIt.css" />
+    <Content Include="Scripts\selectboxit\jquery.selectBoxIt.min.js" />
+    <Content Include="Scripts\toastr\index.html" />
+    <Content Include="Scripts\toastr\toastr-icon.png" />
+    <Content Include="Scripts\toastr\toastr.css" />
+    <Content Include="Scripts\toastr\toastr.js" />
+    <Content Include="Scripts\toastr\toastr.min.css" />
+    <Content Include="Scripts\toastr\toastr.min.js" />
+    <Content Include="Scripts\TweenLite.min.js" />
+    <Content Include="Scripts\TweenMax.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\xenon-api.js" />
+    <Content Include="Scripts\xenon-custom.js" />
+    <Content Include="Scripts\xenon-notes.js" />
+    <Content Include="Scripts\xenon-toggles.js" />
+    <Content Include="Scripts\xenon-widgets.js" />
+    <Content Include="UserData\20153dummy.jpg" />
+    <Content Include="UserData\41008Capture.PNG" />
+    <Content Include="UserData\44505dummy.jpg" />
+    <Content Include="UserData\dummy.jpg" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\Attendance\MarkClass.cshtml" />
+    <Content Include="Views\Attendance\ViewClass.cshtml" />
+    <Content Include="Views\Attendance\ViewStudent.cshtml" />
+    <Content Include="Views\Attendance\EditStudent.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\Error\NotAutherize.cshtml" />
+    <Content Include="Views\Attendance\_Edit.cshtml" />
+    <Content Include="Views\Fee\FeeStructure.cshtml" />
+    <Content Include="Views\Fee\_Fee.cshtml" />
+    <Content Include="Views\Fee\StudentFee.cshtml" />
+    <Content Include="Views\Fee\_StudentFee.cshtml" />
+    <Content Include="Views\Fee\SingleStudentFeeReport.cshtml" />
+    <Content Include="Views\Fee\FamilyReport.cshtml" />
+    <Content Include="Views\Attendance\StudentAttendance.cshtml" />
+    <Content Include="Views\Attendance\KidsAttendance.cshtml" />
+    <Content Include="Views\Fee\MineFee.cshtml" />
+    <Content Include="Views\Fee\KidFee.cshtml" />
+    <Content Include="Views\Setting\SchoolDate.cshtml" />
+    <Content Include="Views\Parent\Add.cshtml" />
+    <Content Include="Views\Teacher\Add.cshtml" />
+    <Content Include="Views\Parent\Edit.cshtml" />
+    <Content Include="Views\Session\_date.cshtml" />
+    <Content Include="Views\Session\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Content\fonts\.DS_Store" />
+    <Content Include="Content\fonts\elusive\.DS_Store" />
+    <Content Include="Content\fonts\elusive\font\elusive.eot" />
+    <Content Include="Content\fonts\elusive\font\elusive.ttf" />
+    <Content Include="Content\fonts\elusive\font\elusive.woff" />
+    <Content Include="Content\fonts\fontawesome\.DS_Store" />
+    <Content Include="Content\fonts\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\linecons\.DS_Store" />
+    <Content Include="Content\fonts\linecons\font\linecons.eot" />
+    <Content Include="Content\fonts\linecons\font\linecons.ttf" />
+    <Content Include="Content\fonts\linecons\font\linecons.woff" />
+    <Content Include="Content\fonts\meteocons\font\meteocons.eot" />
+    <Content Include="Content\fonts\meteocons\font\meteocons.ttf" />
+    <Content Include="Content\fonts\meteocons\font\meteocons.woff" />
+    <Content Include="Images\.DS_Store" />
+    <Content Include="Images\news-image-widget-3" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\datatables\.DS_Store" />
+    <Content Include="Scripts\datatables\images\Sorting icons.psd" />
+    <Content Include="Scripts\devexpress-web-14.1\.DS_Store" />
+    <Content Include="Scripts\jquery-validate\.DS_Store" />
+    <Content Include="Scripts\select2\.DS_Store" />
+    <Content Include="Scripts\select2\.gitignore" />
+    <Content Include="Scripts\select2\LICENSE" />
+    <Content Include="Scripts\select2\select2.jquery.json" />
+    <Content Include="Scripts\select2\select2_locale_en.js.template" />
+    <Content Include="Scripts\selectboxit\.DS_Store" />
+    <Content Include="Scripts\toastr\.DS_Store" />
+    <Content Include="Scripts\toastr\toastr.less" />
+    <Content Include="Scripts\toastr\toastr.min.js.map" />
+    <Content Include="Scripts\toastr\toastr.scss" />
+    <Content Include="Views\Class\Index.cshtml" />
+    <Content Include="Views\Class\_class.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Exam\ExamMarks.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\StudentMarks.cshtml" />
+    <Content Include="Views\Exam\_exam.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\_Login.cshtml" />
+    <Content Include="Views\Parent\Index.cshtml" />
+    <Content Include="Views\Parent\_parent.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\School\Index.cshtml" />
+    <Content Include="Views\School\_school.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\SideBar.cshtml" />
+    <Content Include="Views\Student\Add.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\View.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Subject\_subject.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\_teacher.cshtml" />
+    <Content Include="Views\Permissions\NotAuthentic.cshtml" />
+    <Content Include="Views\Permissions\NotAuthorize.cshtml" />
+    <Content Include="Views\Permissions\HowTo.cshtml" />
+    <Content Include="Views\Permissions\Checking.cshtml" />
+    <Content Include="Views\Permissions\AtuhCheck.cshtml" />
+    <Content Include="Views\Permissions\logout.cshtml" />
+    <Content Include="Views\Permissions\HelperClass.cshtml" />
+    <Content Include="Views\Setting\ChangePassword.cshtml" />
+    <Content Include="Views\Setting\Viewprofile.cshtml" />
+    <Content Include="Views\Setting\UpdateProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\devexpress-web-14.1\ts\dx.all.d.ts" />
+    <TypeScriptCompile Include="Scripts\devexpress-web-14.1\ts\dx.chartjs.d.ts" />
+    <TypeScriptCompile Include="Scripts\devexpress-web-14.1\ts\dx.webappjs.d.ts" />
+    <TypeScriptCompile Include="Scripts\devexpress-web-14.1\ts\globalize.d.ts" />
+    <TypeScriptCompile Include="Scripts\devexpress-web-14.1\ts\jquery.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4013</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4013/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

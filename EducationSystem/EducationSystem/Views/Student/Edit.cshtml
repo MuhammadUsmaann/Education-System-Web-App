@@ -1,0 +1,298 @@
+﻿@model EducationSystem.Models.Entities.Student
+
+@if (Model != null)
+{
+    <input type="hidden" value="@Model.parent_id" id="parent_id_val" />
+    <input type="hidden" value="@Model.class_id" id="class_id_val" />
+    <input type="hidden" value="@Model.gender" id="gender_id_val" />
+    <input type="hidden" value="@Model.user_id" id="user_id_val" />
+    
+}
+else
+{
+    <h1>User is not existed</h1>
+    return;
+}
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Student Admission Form</h3>
+                <a class="btn btn-success btn-icon fright" href="/Student" >Back to List</a>
+			</div>
+			<div class="panel-body">
+				<form id="student_admission_form" class="form-horizontal validate">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="student_fname">First Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="student_fname" value="@Model.first_name" id="student_fname" placeholder="First name">
+						</div>
+					</div>	
+					<div class="form-group-separator"></div>
+				    <div class="form-group">
+						<label class="col-sm-2 control-label" for="student_lname">Last name</label>
+						<div class="col-sm-10">
+							<input type="text" value="@Model.last_name" class="form-control" name="student_lname" id="student_lname" placeholder="last name">
+						</div>
+					</div>	
+					<div class="form-group-separator"></div>
+                    
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Parent</label>
+									
+						<div class="col-sm-10">
+							<select class="form-control" name="student_parent" id="student_parent">
+								<option value="">Select Parent</option>
+                                @foreach (var parent in ViewBag.parents)
+                                {
+                                    <option value="@parent.user_id">@parent.first_name @parent.last_name</option> 
+                                }
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group-separator"></div>
+                    
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Class</label>
+									
+						<div class="col-sm-10">
+							<select class="form-control" name="student_class" id="student_class">
+								<option value="">Select Class</option>
+                                @foreach (var cls in ViewBag.classes)
+                                {
+                                    <option value="@cls.class_id">@cls.name</option> 
+                                }
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group-separator"></div>
+					@*<div class="form-group">
+						<label class="col-sm-2 control-label">School</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="student_school" id="student_school">
+								<option value="">Select School</option>
+                                @foreach (var school in ViewBag.schools)
+                                {
+                                    <option value="@school.id">@school.name</option> 
+                                }
+							</select>
+						</div>
+					</div>
+								
+					<div class="form-group-separator"></div>*@
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="student_roll">Roll</label>
+						<div class="col-sm-10">
+							<input type="text" value="@Model.roll" class="form-control" name="student_roll" id="student_roll" placeholder="Roll">
+						</div>
+					</div>
+					<div class="form-group-separator"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="student_dob">Date of Birth</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control datepicker" value="@Model.birthday" id="student_dob" name="student_dob" placeholder="Date of birth">
+						</div>
+					</div>	
+					<div class="form-group-separator"></div>
+                    
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Gender</label>
+						<div class="col-sm-10">
+							<select class="form-control" id="student_gender" name="student_gender"> 
+								<option value="">Select Gender</option>
+                                <option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group-separator"></div>
+                    <div class="form-group">
+						<label class="col-sm-2 control-label" for="student_address">Address</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="student_address" value="@Model.address" name="student_address" placeholder="Address">
+						</div>
+					</div>	
+					<div class="form-group-separator"></div>
+                    <div class="form-group">
+						<label class="col-sm-2 control-label" for="student_username">Username</label>
+						<div class="col-sm-10">
+							<input type="email" class="form-control" id="student_username" value="@Model.username" name="student_username" placeholder="Email">
+						</div>
+					</div>
+					<div class="form-group-separator"></div>
+                    <div class="form-group">
+						<label class="col-sm-2 control-label" for="student_password">Password</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="student_password" value="@Model.password" name="student_password" placeholder="Placeholder">
+						</div>
+					</div>
+					<div class="form-group-separator"></div>
+                    <input type="submit" class="btn btn-success btn-icon" id="submit-form" value="Update User Detail"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+
+        $(".datepicker").each(function (i, el) {
+            var $this = $(el),
+                opts = {
+                    format: attrDefault($this, 'format', 'mm/dd/yyyy'),
+                    startDate: attrDefault($this, 'startDate', ''),
+                    endDate: attrDefault($this, 'endDate', ''),
+                    daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+                    startView: attrDefault($this, 'startView', 0),
+                    rtl: rtl()
+                },
+                $n = $this.next(),
+                $p = $this.prev();
+            $this.datepicker(opts);
+        });
+
+        $("#student_parent").val($("#parent_id_val").val());
+       // $("#student_school").val($("#school_id_val").val());
+        $("#student_class").val($("#class_id_val").val());
+        $("#student_gender").val($("#gender_id_val").val());
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#student_admission_form").validate({
+            rules: {
+                student_fname: {
+                    required: true
+                },
+                student_lname: {
+                    required: true
+                },
+                student_parent: {
+                    required: true
+                },
+                student_dob:{
+                    required: true
+                },
+                student_roll: {
+                    required: true
+                },
+                student_gender: {
+                    required: true
+                },
+                student_phone: {
+                    required: true
+                },
+                student_username: {
+                    required: true
+                },
+                student_password: {
+                    required: true
+                },
+                //student_school: {
+                //    required: true
+                //},
+                student_class: {
+                    required: true
+                },
+            },
+            messages: {
+                student_fname: {
+                    required: "Required student first name"
+                },
+                student_lname: {
+                    required: "Required student last name"
+                },
+                student_parent: {
+                    required: "Required student parent"
+                },
+                student_dob: {
+                    required: "Required student date of birth"
+                },
+                student_roll: {
+                    required: "Required student roll"
+                },
+                student_gender: {
+                    required: "Required student gender"
+                },
+                student_phone: {
+                    required: "Required student phone"
+                },
+                student_username: {
+                    required: "Required student username"
+                },
+                student_password: {
+                    required: "Required student password"
+                },
+                //student_school: {
+                //    required: "Required student school"
+                //},
+                student_class: {
+                    required: "Required student class"
+                },
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var data = {
+                    user: $('#user_id_val').val(),
+                    first_name: $(form).find('#student_fname').val(),
+                    last_name: $(form).find('#student_lname').val(),
+                    birthday: $(form).find('#student_dob').val(),
+                    gender: $(form).find('#student_gender').val(),
+                    address: $(form).find('#student_address').val(),
+                    phone: $(form).find('#student_phone').val(),
+                    username: $(form).find('#student_username').val(),
+                    //school_id: $(form).find('#student_school').val(),
+                    password: $(form).find('#student_password').val(),
+                    roll: $(form).find('#student_roll').val(),
+                    parent_id: $(form).find('#student_parent').val(),
+                    class_id: $(form).find('#student_class').val()
+                };
+                var url = "/Student/Edit";
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (resp) {
+                                    window.location.href = '/';
+                                }
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>
+

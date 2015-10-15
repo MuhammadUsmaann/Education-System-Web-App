@@ -1,0 +1,223 @@
+﻿
+<div class="modal fade" id="exam-detail-modal">
+
+    <input type="hidden" id="action-type" value="add" class=""/>
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Exam Detail</h4>
+			</div>
+            <form id="exam_detail_form" class="validate"> 
+			<div class="modal-body">
+				<div class="row">
+                    <div class="col-md-12">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Exam Name</label>
+                            <input type="text" class="form-control" name="exam_fname" id="exam_name" placeholder="exam first name">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Exam Date</label>
+                            <input type="text" placeholder="Exam Date" class="form-control datepicker" id="exam_date" name="exam_date" data-start-view="2">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Comment</label>
+                            <input type="text" placeholder="Exam Comment" class="form-control" id="exam_comment" name="exam_comment">
+						</div>
+					</div>
+                </div>
+               @* <div class="row">
+                    <div class="col-md-12">
+						<div class="form-group">
+							<label for="field-1" class="control-label">School</label>
+                            <select class="form-control teacher_school" name="exam_school" id="exam_school">
+                                <option value="">Select School</option>   
+                                @foreach (var school in ViewBag.schools_list)
+                                {
+                                    <option value="@school.id">@school.name</option>   
+                                }
+							</select>
+						</div>
+					</div>
+                </div>*@
+			</div>
+				
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-info" id="save-changes-id">Save changes</button>
+			</div>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $(".datepicker").each(function (i, el) {
+            var $this = $(el),
+                opts = {
+                    format: attrDefault($this, 'format', 'mm/dd/yyyy'),
+                    startDate: attrDefault($this, 'startDate', ''),
+                    endDate: attrDefault($this, 'endDate', ''),
+                    daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+                    startView: attrDefault($this, 'startView', 0),
+                    rtl: rtl()
+                },
+                $n = $this.next(),
+                $p = $this.prev();
+            $this.datepicker(opts);
+        });
+
+        $("#exam-modal-btn").click(function () {
+            $("#action-type").val("add");
+            jQuery('#exam-detail-modal').modal('show', { backdrop: 'static' });
+        });
+        $('#exam-detail-modal').on('hidden.bs.modal', function () {
+            $('#exam_name').val("");
+            $('#exam_date').val("");
+            //$('#exam_school').val("");
+            $('#exam_comment').val("");
+        })
+
+        $("select.exam-action-type").change(function () {
+            var action = $(this).val();
+            if (action === "edit") {
+
+                $("#action-type").val("edit");
+                $("#action-type").addClass($(this).attr("id"));
+
+                $.ajax({
+                    url: "/exam/find",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $('#exam_name').val(response.name);
+                            $('#exam_date').val(response.date);
+                           // $('#exam_school').val(response.school_id);
+                            $('#exam_comment').val(response.comment);
+                            jQuery('#exam-detail-modal').modal('show', { backdrop: 'static' });
+                        }
+                    }
+                });
+            }
+            else if (action == "delete") {
+                $("#action-type").addClass($(this).attr("id"));
+                $.ajax({
+                    url: "/Exam/Delete",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            window.location.href = "/exam";
+                        }
+                    }
+                });
+            }
+        });
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#exam_detail_form").validate({
+            rules: {
+                exam_name: {
+                    required: true
+                },
+                exam_date: {
+                    required: true
+                },
+                //exam_school: {
+                //    required: true
+                //}
+            },
+
+            messages: {
+                exam_name: {
+                    required: 'Required exam name'
+                },
+                exam_date: {
+                    required: 'Required exam date'
+                },
+                //exam_school: {
+                //    required: 'Required exam school'
+                //},
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var action = $("#action-type").val();
+
+                var data = {
+                    name: $(form).find('#exam_name').val(),
+                    date: $(form).find('#exam_date').val(),
+                    //school_id: $(form).find('#exam_school').val(),
+                    comment: $(form).find('#exam_comment').val(),
+                };
+
+                var url = "/Exam/";
+                if (action == "add") {
+                    url += "Add";
+                }
+                else if (action == "edit") {
+                    url += "Update";
+                    data.id = $("#action-type").attr("class");
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (resp) {
+                                    window.location.href = '/exam';
+                                }
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>
+
+

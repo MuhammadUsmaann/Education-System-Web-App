@@ -1,0 +1,194 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.SubjectExam>
+@{
+    ViewBag.ModalName = "";
+    var isModel = false;
+    if (Model != null)
+    {
+        isModel = true;
+    }
+}
+<input type="hidden" value="@ViewBag.class_id" id="class-id-hidden" />
+<input type="hidden" value="@ViewBag.subject_id" id="subject-id-hidden" />
+<input type="hidden" value="@ViewBag.exam_id" id="exam-id-hidden" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Marks for subject
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select class="form-control" id="exam_id">
+                            <option value="">Select Class</option>
+                            @foreach (var cls in ViewBag.exams)
+                            {
+                                <option value="@cls.exam_id">@cls.name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="class_id">
+                            <option value="">Select Class</option>
+                            @foreach (var cls in ViewBag.classes)
+                            {
+                                <option value="@cls.class_id">@cls.name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="subject_id">
+                            <option value="">Select Subject</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn" id="manage-exam-marks-btn"> Update Marks </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Update Student Marks</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div role="form" class="form-horizontal">
+                        @if (Model != null)
+                        {
+                            foreach (var exam in Model)
+                            {
+                                <div class="form-group subject-exam-detail">
+                                    <input type="hidden" id="subject-marks-id-hidden" value="@exam.id" />
+                                    <label class="col-sm-2 control-label" for="field-1">@exam.student_name</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" class="form-control" id="subject-marks" value="@exam.marks" placeholder="Subject Marks">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="subject-comment" value="@exam.comment" placeholder="Comment">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="button" class="btn btn-secondary subject-update-btn" value="Update" />
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <input type="button" class="btn btn-secondary subject-update-all-btn" value="Update All" />
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <h1>Please select to see the exams type and marks</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var subjects = @Html.Raw(@ViewBag.subjects)
+    var iModel = '@isModel'
+    var class_id = $("#class-id-hidden").val();
+    jQuery(document).ready(function () {
+        if (iModel === 'True')
+        {
+            $("#subject_id").html('');
+            $("#subject_id").html('<option value="">Select Subject</option>');
+            for (var x = 0 ; x < subjects.length ; x++)
+            {
+                if (subjects[x].class_id == class_id)
+                {
+                    $("#subject_id").append('<option value="' + subjects[x].subject_id + '">' + subjects[x].name + '</option>');
+                }
+            }
+        }
+        $("#subject_id").val($("#subject-id-hidden").val());
+        $("#exam_id").val($("#exam-id-hidden").val());
+        $("#class_id").val(class_id);
+
+        $(".subject-update-btn").click(function () {
+            var parent = $(this).closest(".subject-exam-detail");
+            var exam_id =$("#exam_id").val();
+            //var subject_id =$("#subject_id").val();
+            //var class_id =$("#class_id").val();
+
+            var data = {
+                exam_id:$(parent).find("#subject-marks-id-hidden").val(),
+                marks : $(parent).find("#subject-marks").val(),
+                marks : $(parent).find("#subject-marks").val()
+            };
+
+            $.ajax({
+                url: "/Exam/UpdateStudentMark",
+                method: 'POST',
+                dataType: 'json',
+                data: data,
+                success: function (response) {
+                    if (response) {
+                        alert("Done dna done");
+                    }
+                }
+            });
+
+        });
+
+        $(".subject-update-all-btn").click(function(){
+            var marks_objects = $(".subject-exam-detail");
+
+            var marks_detail = {};
+            var exam_id =$("#exam_id").val();
+            var subject_id =$("#subject_id").val();
+            var class_id =$("#class_id").val();
+            marks_detail['data'] = [];
+
+            $.each(marks_objects,function(index, val){
+                var marks = $(val).find("#subject-marks").val();
+                var id = $(val).find("#student-id-hidden").val();
+                marks_detail['data'].push({marks : marks, student_id : id});
+            });
+
+            $.ajax({
+                url: "/Exam/UpdateAllStudentMarks",
+                method: 'POST',
+                dataType: 'json',
+                traditional: true,
+                data: {exam_id:exam_id, subject_id : subject_id, class_id : class_id, data: marks_detail},
+                success: function (response) {
+                    if (response) {
+                        alert("Done dna done");
+                    }
+                }
+            });
+        });
+        $("#class_id").change(function () {
+            var class_id = $(this).val();
+
+            $("#subject_id").html('');
+
+            $("#subject_id").html('<option value="">Select Subject</option>');
+
+            for (var x = 0 ; x < subjects.length ; x++)
+            {
+                if (subjects[x].class_id == class_id)
+                {
+                    $("#subject_id").append('<option value="' + subjects[x].subject_id + '">' + subjects[x].name + '</option>');
+                }
+            }
+        });
+
+        $("#manage-exam-marks-btn").click(function () {
+            var class_id = $("#class_id").val() || 0;
+            var subject_id = $("#subject_id").val() || 0;
+            var exam_id = $("#exam_id").val() || 0;
+            window.location.href = "/Exam/StudentMarks?exam_id="+exam_id+"&class_id=" + class_id + "&subject_id=" + subject_id;
+
+        });
+    });
+</script>

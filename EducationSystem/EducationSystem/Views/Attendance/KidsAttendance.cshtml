@@ -1,0 +1,80 @@
+﻿@model EducationSystem.Models.Entities.StudentAttendance
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Attendance
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @using (Html.BeginForm("kid", "attendance", FormMethod.Get, new { id = "view-student-atnd" }))
+                    {
+                        <div class="col-md-3">
+                            <select class="form-control" id="kid_id" name="kid_id">
+                                <option value="">Select Class</option>
+                                @foreach (var kid in ViewBag.kids)
+                                {
+                                    <option value="@kid.user_id">@kid.full_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="Attendance Month" class="form-control datepickerMonth" id="attend_date" name="date" data-start-view="2">
+                        </div>
+                        <div class="col-md-2">
+                            <input class="btn" type="submit" value="View Attendance" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model != null)
+    {   
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @ViewBag.kid.full_name --- @ViewBag.kid.class_name
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="atttendance-table-div col-md-12">
+                        <table id="example-1" class="table  table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Day</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var atnd in Model.AttendanceDays)
+                                {
+                                    <tr class="student-attendance">
+                                        <td class="name">@atnd.date</td>
+                                        <td class="name">@atnd.dayName</td>
+                                        @if (atnd.status == EducationSystem.Models.AttendanceStatus.NONE)
+                                        {
+                                            <td class="day"><i class="glyphicon glyphicon-minus"></i></td>
+                                        }
+                                        else if (atnd.status == EducationSystem.Models.AttendanceStatus.PRESENT)
+                                        {
+                                            <td class="day"><i class="glyphicon glyphicon-ok"></i></td>
+                                        }
+                                        else if (atnd.status == EducationSystem.Models.AttendanceStatus.ABSENT)
+                                        {
+                                            <td class="day"><i class="glyphicon glyphicon-remove"></i></td>
+                                        }
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

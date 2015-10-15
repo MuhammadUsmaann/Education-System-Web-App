@@ -1,0 +1,125 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.StudentOneDay>
+@{
+    ViewBag.ModalName = "";
+    var isModel = false;
+    if (Model != null)
+    {
+        isModel = true;
+    }
+}
+<input type="hidden" value="@ViewBag.class_id" id="class-id-hidden" />
+<input type="hidden" value="@ViewBag.date" id="date-hidden" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Marks for subject
+            </div>
+            <div class="panel-body">
+                <div class="row">   
+                    @using (@Html.BeginForm("MarkClass", "Attendance",FormMethod.Get))
+                    {
+                        <div class="col-md-3">
+                            <select class="form-control" name="class_id" id="class_id">
+                                <option value="">Select Class</option>
+                                @foreach (var cls in ViewBag.classes)
+                                {
+                                    <option value="@cls.class_id">@cls.name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="Exam Date" class="form-control datepicker" id="attend_date" name="date" data-start-view="2">
+                        </div>
+                        <div class="col-md-2">
+                            <input class="btn" id="view-class-attendance-n" type="submit" value=" Update Attendance" />
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model != null)
+    {
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Ajax.BeginForm("MarkClass", "Attendance", null, new AjaxOptions
+                                                                            {
+                                                                                HttpMethod = "post",
+                                                                                OnSuccess = "Success",
+                                                                                OnBegin = "Begin",
+                                                                                OnFailure = "Failure",
+                                                                                OnComplete = "Complete"
+                                                                            }))
+                    {
+                        <table id="example-1" class="table  table-bordered">
+                            <thead>
+                                <tr>
+                                    <th >Name</th>
+                                    <th><input type="checkbox" class="cbr"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <input type="hidden" name="date" value="@ViewBag.date"/>
+                                <input type="hidden" name="class_id" value="@ViewBag.class_id" />
+                                @{
+                                    var count = 0;
+                                }
+                                @foreach (var std in Model)
+                                {
+                                    <tr>
+                                        @Html.Hidden("attendance[" + @count.ToString() + "].student_id", std.student_id.ToString())
+                                        <td >@std.student_name</td>
+                                        <td>@Html.CheckBox("attendance[" + @count.ToString() + "].fstatus", false, new { @id = "attendace[" + @count.ToString() + "].status", @class = "checkingB cbr" })</td>
+                                    </tr>
+                                    count++;
+                                }
+                            </tbody>
+                        </table>
+                        <input type="submit" value="Submit" />
+                    }
+                    </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+
+    var iModel = '@isModel'
+    var class_id = $("#class-id-hidden").val();
+    var date_h = $("#date-hidden").val();
+
+    jQuery(document).ready(function () {
+
+        $("#class_id").val(class_id);
+        $("#attend_date").val(date_h);
+
+        var checkboxes = $(".checkingB");
+
+        $.each(checkboxes,function (index,val) {
+            var name = $(val).attr('name');
+
+            var atttr = $("input[name='" + name + "']");
+
+            $.each(atttr, function (index, hidden) {
+                if ($(hidden).attr("type") === "hidden") {
+                    $(hidden).remove();
+                }
+            })
+            
+
+        });
+    });
+    function Success(data) {
+        alert("Attendance Marked");
+    }
+    function Begin() {
+        
+    }
+    function Complete() {
+        
+    }
+</script>

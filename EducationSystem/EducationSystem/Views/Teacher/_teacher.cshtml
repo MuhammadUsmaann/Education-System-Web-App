@@ -1,0 +1,293 @@
+﻿<div class="modal fade" id="teacher-detail-modal">
+    <input type="hidden" id="action-type" value="add" class=""/>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Teacher Detail</h4>
+			</div>
+            <form id="teacher_detail_form" class="validate"> 
+			<div class="modal-body">
+				<div class="row">
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">First Name</label>
+                            <input type="text" class="form-control" name="teacher_fname" id="teacher_fname" placeholder="Teacher first name">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Last Name</label>
+                            <input type="text" class="form-control" name="teacher_lname" id="teacher_lname" placeholder="Teacher last name">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Birthday</label>
+                            <input type="text" class="form-control datepicker" id="teacher_bd" name="teacher_bd" data-start-view="2">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Phone</label>
+                            <input type="text" class="form-control" name="teacher_phone" id="teacher_phone" placeholder="Phone">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="field-3" class="control-label">Email</label>
+							<input type="email" class="form-control"  name="teacher_email" id="teacher_email" placeholder="Email">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-3" class="control-label">Password</label>
+							<input type="password" class="form-control"  name="teacher_password" id="teacher_password" placeholder="Password">
+						</div>
+					</div>
+				</div>
+                <div class="row">
+					<div class="col-md-6">
+					    <div class="form-group">
+						    <label for="field-2" class="control-label">Gender</label>
+						    <select class="form-control" name="teacher_gender" id="teacher_gender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+						    </select>
+					    </div>
+                    </div>
+				</div>
+                <div class="row">
+                    <div class="col-md-12">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Address</label>
+                            <input type="text" class="form-control" name="teacher_address" id="teacher_address" placeholder="Address">
+						</div>
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+    					<div class="form-group">
+							<label for="field-1" class="control-label">Message</label>
+                            <textarea type="text" class="form-control" name="teacher_message" id="teacher_message" placeholder="Other Details" ></textarea>
+						</div>
+					</div>
+                </div>
+			</div>
+				
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-info" id="save-changes-id">Save changes</button>
+			</div>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function()
+    {
+        $("#teacher-modal-btn").click(function () {
+            $("#action-type").val("add");
+            jQuery('#teacher-detail-modal').modal('show', { backdrop: 'static' });
+        });
+        $('#teacher-detail-modal').on('hidden.bs.modal', function () {
+            $('#teacher_fname').val("");
+            $('#teacher_lname').val("");
+            $('#teacher_bd').val("");
+            $('#teacher_gender').val("");
+            $('#teacher_address').val("");
+            $('#teacher_phone').val("");
+            $('#teacher_email').val("").prop("readonly", false);
+            $('#teacher_password').val("");
+            $('#teacher_message').val("");
+        })
+        $(".datepicker").each(function (i, el) {
+            var $this = $(el),
+                opts = {
+                    format: attrDefault($this, 'format', 'mm/dd/yyyy'),
+                    startDate: attrDefault($this, 'startDate', ''),
+                    endDate: attrDefault($this, 'endDate', ''),
+                    daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+                    startView: attrDefault($this, 'startView', 0),
+                    rtl: rtl()
+                },
+                $n = $this.next(),
+                $p = $this.prev();
+            $this.datepicker(opts);
+        });
+
+        $("select.teacher-action-type").change(function () {
+            var action = $(this).val();
+            if (action === "edit") {
+
+                $("#action-type").val("edit");
+                $("#action-type").addClass($(this).attr("id"));
+
+                $.ajax({
+                    url: "/Teacher/Find",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $('#teacher_fname').val(response.first_name);
+                            $('#teacher_lname').val(response.last_name);
+                            $('#teacher_bd').val(response.birthday);
+                            $('#teacher_gender').val(response.gender);
+                            $('#teacher_address').val(response.address);
+                            $('#teacher_phone').val(response.phone);
+                            $('#teacher_email').val(response.username);//.prop("readonly", true);
+                            $('#teacher_password').val(response.password);
+                            $('#teacher_message').val(response.other_detail);
+                            jQuery('#teacher-detail-modal').modal('show', { backdrop: 'static' });
+                        }
+                    }
+                });
+            }
+            else if (action == "delete") {
+                $("#action-type").addClass($(this).attr("id"));
+                $.ajax({
+                    url: "/Teacher/Delete",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            window.location.href = "/teacher";
+                        }
+                    }
+                });
+            }
+        });
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#teacher_detail_form").validate({
+            rules: {
+                teacher_fname: {
+                    required: true
+                },
+                teacher_lname: {
+                    required: true
+                },
+                teacher_bd: {
+                    required: true
+                },
+
+                teacher_gender: {
+                    required:true
+                },
+                teacher_phone: {
+                    required: true
+                },
+                teacher_email: {
+                    required: true
+                },
+                teacher_password: {
+                    required: true
+                },
+            },
+
+            messages: {
+                teacher_fname: {
+                    required: 'Required teacher first name'
+                },
+                teacher_lname: {
+                    required: 'Required teacher last name'
+                },
+                teacher_bd: {
+                    required: 'Required teacher address'
+                },
+                teacher_gender: {
+                    required: 'Required teacher gender'
+                },
+                teacher_phone: {
+                    required: 'Required teacher contact number'
+                },
+                teacher_email: {
+                    required: 'Required teacher email '
+                },
+                teacher_password: {
+                    required: 'Required teacher password'
+                },
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var action = $("#action-type").val();
+
+                var data =  {
+                    fname: $(form).find('#teacher_fname').val(),
+                    lname: $(form).find('#teacher_lname').val(),
+                    birthday: $(form).find('#teacher_bd').val(),
+                    gender: $(form).find('#teacher_gender').val(),
+                    address: $(form).find('#teacher_address').val(),
+                    phone: $(form).find('#teacher_phone').val(),
+                    username: $(form).find('#teacher_email').val(),
+                  //  school_id : $(form).find('#teacher_school').val(),
+                    password: $(form).find('#teacher_password').val(),
+                    other: $(form).find('#teacher_message').val(),
+                };
+
+                var url = "/Teacher/";
+                if (action == "add") {
+                    url += "Add";
+                }
+                else if (action == "edit") {
+                    url += "Update";
+                    data.id = $("#action-type").attr("class");
+                    alert(data.id);
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data:data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (resp) {
+                                    window.location.href = '/teacher';
+                                }
+                            }
+                        });
+                        
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>
+

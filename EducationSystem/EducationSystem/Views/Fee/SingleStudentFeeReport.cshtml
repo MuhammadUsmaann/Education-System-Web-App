@@ -1,0 +1,194 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.StudentFee>
+
+<div class="page-title">
+    <div class="title-env">
+        <h1 class="title">Fee Detail</h1>
+        <p class="description">Student Fee detail</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Marks for subject
+            </div>
+
+            <div class="panel-body">
+                @using (@Html.BeginForm("single-report", "fee", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control" name="class_id" id="class_id">
+                                <option value="">Select Class</option>
+                                @foreach (var cls in ViewBag.classes)
+                                {
+                                    <option value="@cls.class_id">@cls.name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" name="student_id" id="student_id">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn" value="View Student Fee">
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.isSelected!= null && ViewBag.isSelected == true)
+    {
+        var student = (EducationSystem.Models.Entities.Student)ViewBag.student;
+   
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@student.full_name</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div>@student.full_name</div>
+                        <div>S/D/O @student.parent_name</div>
+                        <div>class name @student.class_name</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>fee</th>
+                                        <th>Paid</th>
+                                        <th>Month</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model != null && Model.Count() != 0)
+                                    {
+                                        var count = 0;
+                                        var statusValue = "";
+                                        foreach (var fee in Model)
+                                        {
+
+                                            var status_temp = false;
+                                            if (fee.paid_status == EducationSystem.Models.FeePaidStatus.PAID)
+                                            {
+                                                status_temp = true;
+                                            }
+                                            <tr class="fee-detail-tr">
+                                                <td>@(count + 1)</td>
+                                                <td>@fee.fee</td>
+
+                                                @if (status_temp)
+                                                {
+                                                    <td><span class="add-on"><i class="glyphicon glyphicon-ok"></i></span></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><span class="add-on"><i class="glyphicon glyphicon-remove"></i></span></td>
+                                                }
+
+                                                <td>
+                                                    @fee.month"
+                                                </td>
+
+
+                                            </tr>
+                                                count++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12">
+                            @if (ViewBag.add_fee != null)
+                            {
+                                var count = 0;
+
+                                foreach (EducationSystem.Models.Entities.StudentFee sf in ViewBag.add_fee)
+                                {
+                                    var fee_name = "";
+                                    var fee_amount = 0;
+                                    var status = false;
+                                    fee_amount = sf.fee;
+
+                                    count++;
+
+                                    if (sf.paid_status == EducationSystem.Models.FeePaidStatus.PAID)
+                                    {
+                                        status = true;
+                                    }
+
+                                    if (sf.type == EducationSystem.Models.FeeType.ADMISSION_FEE)
+                                    {
+                                        fee_name = "Admission Fee";
+                                    }
+                                    else if (sf.type == EducationSystem.Models.FeeType.EXAMINATION_FEE)
+                                    {
+                                        fee_name = "Examination Fee";
+                                    }
+                                    else if (sf.type == EducationSystem.Models.FeeType.OTHER_CHARGES)
+                                    {
+                                        fee_name = "Other Charges";
+                                    }
+
+                                    <div>
+                                        @fee_name ---- @sf.fee
+
+                                    </div>
+                                }
+
+                            }
+                        </div>
+                        <div class="col-sm-12">
+                            <div>Discount Amount =  @ViewBag.discount</div>
+                            <div>Total Amount =  @ViewBag.total</div>
+                        </div>
+                        }
+                    </div>
+                    <div class="vspacer v3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
+    <script>
+        var subjects = @Html.Raw(@ViewBag.students)
+        var class_id = @ViewBag.class_id
+        var student_id = @ViewBag.student_id
+
+        jQuery(document).ready(function () {
+
+            $("#class_id").change(function () {
+                var class_id = $(this).val();
+
+                $("#student_id").html('');
+
+                $("#student_id").html('<option value="">Select Subject</option>');
+
+                for (var x = 0 ; x < subjects.length ; x++)
+                {
+                    if (subjects[x].class_id == class_id)
+                    {
+                        $("#student_id").append('<option value="' + subjects[x].id + '">' + subjects[x].fullname+ '</option>');
+                    }
+                }
+
+                $("#student_id").val(student_id);
+            });
+            if(class_id != "")
+            {
+                $("#class_id").trigger("change");
+            }
+            $("#class_id").val(class_id);
+
+        });
+    </script>

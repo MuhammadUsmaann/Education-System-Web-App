@@ -1,0 +1,108 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.Subject>
+@{
+    ViewBag.ModalName = "subject";
+}
+<div class="page-title">
+	<div class="title-env">
+		<h1 class="title">subject</h1>
+		<p class="description">The subject detail can modify here</p>
+	</div>
+</div>
+
+
+
+
+
+
+<div class="row">
+	<div class="col-md-12">	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">subject list</h3>
+				<div class="panel-options">
+					<a href="javascript:;" id="subject-modal-btn" class="btn btn-single btn-sm">Add subject</a>
+				</div>
+			</div>
+			<div class="panel-body">
+							
+				<script type="text/javascript">
+				jQuery(document).ready(function($)
+				{
+					$("#example-2").dataTable({
+						dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+						aoColumns: [
+							null,
+							null,
+                            null,
+							{ bSortable: false }
+						],
+					});
+								
+					// Replace checkboxes when they appear
+					var $state = $("#example-2 thead input[type='checkbox']");
+								
+					$("#example-2").on('draw.dt', function()
+					{
+						cbr_replace();
+									
+						$state.trigger('change');
+					});
+					// Script to select all checkboxes
+					$state.on('change', function(ev)
+					{
+						var $chcks = $("#example-2 tbody input[type='checkbox']");
+									
+						if($state.is(':checked'))
+						{
+							$chcks.prop('checked', true).trigger('change');
+						}
+						else
+						{
+							$chcks.prop('checked', false).trigger('change');
+						}
+					});
+				});
+				</script>
+							
+				<table class="table table-bordered table-striped" id="example-2">
+					<thead>
+						<tr>
+							<th>Class</th>
+							<th>Subject</th>
+                            <th>Teacher</th>                            
+                            <th>Actions</th>
+						</tr>
+					</thead>
+								
+					<tbody class="middle-align">
+						@foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m =>item.class_name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.teacher_name)
+                                </td>
+                                <td>
+								    <div class="col-sm-10">
+									    <select class="form-control subject-action-type" id="@Html.DisplayFor(m => item.subject_id)">
+										    <option value="">Action</option>
+										    <option value="edit">Edit</option>
+										    <option value="delete">Delete</option>
+									    </select>
+								    </div>
+                                </td>
+                            </tr>
+                       }		
+					</tbody>
+				</table>	
+			</div>
+		</div>
+	</div>
+</div>
+
+

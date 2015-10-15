@@ -1,0 +1,396 @@
+﻿@model EducationSystem.Models.View.StudentModelView
+@{
+    string actionURL = "Add";
+    if (ViewBag.actionURL != null)
+    {
+        actionURL = ViewBag.actionURL;
+    }
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Student Admission Form</h3>
+            </div>
+            <div class="panel-body">
+               @using (Ajax.BeginForm(actionURL, "Student", null, new AjaxOptions
+                                                            {
+                                                                HttpMethod = "post",
+                                                                OnSuccess = "Success",
+                                                                OnBegin = "Begin",
+                                                                OnFailure = "Failure",
+                                                                OnComplete = "Complete"
+                                                            }, new { @class = "form-horizontal validate" }))
+                {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+if (actionURL == "edit")
+{
+    <input type="hidden" value="@ViewBag.id" name="id" />
+}
+               <div class="form-group">
+
+                        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FirstName)
+                        </div>
+
+                        @*<label class="col-sm-2 control-label" for="student_fname">First Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LastName)
+                        </div>
+
+                        @*<label class="col-sm-2 control-label" for="student_lname">Last name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="student_lname" id="student_lname" placeholder="last name">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Parent, new { @class = "col-md-2 control-label" })
+                        <div class="col-sm-10">
+                             
+                            @*Html.DropDownList("Parent", ViewBag.parent, "Select FY", new { @class = "form-control" })*@
+                            <select class="form-control" name="Parent" id="Parent">
+                                <option value="">Select Parent</option>
+
+                                @foreach (EducationSystem.Models.Entities.Parent parent in ViewBag.parents)
+                                {
+                                    <option value="@parent.user_id">@parent.full_name</option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Class, new { @class = "col-md-2 control-label" })
+                        <div class="col-sm-10">
+                            <select class="form-control" name="Class" id="Class">
+                                <option value="">Select Class</option>
+                                @foreach (EducationSystem.Models.Entities.Class parent in ViewBag.classes)
+                                {
+                                    <option value="@parent.class_id">@parent.name</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.RollNo, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.RollNo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RollNo)
+                        </div>
+
+                        @*<label class="col-sm-2 control-label" for="student_roll">Roll</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="student_roll" id="student_roll" placeholder="Roll">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DateofBirth, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.DateofBirth, new { @class = "datepicker form-control" })
+                            @Html.ValidationMessageFor(m => m.DateofBirth)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_dob">Date of Birth</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control datepicker" id="student_dob" name="student_dob" placeholder="Date of birth">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+                        <div class="col-sm-10">
+                            <select class="form-control" id="Gender" name="Gender">
+                                <option value="">Select Gender</option>
+                                <option value="@EducationSystem.Models.GenderCode.MALE">Male</option>
+                                <option value="@EducationSystem.Models.GenderCode.FEMALE">Female</option>
+                                <option value="@EducationSystem.Models.GenderCode.OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Address)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_address">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="student_address" name="student_address" placeholder="Address">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EmailAddress, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.EmailAddress)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_username">Username</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="student_username" name="student_username" placeholder="Email">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_password">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="student_password" name="student_password" placeholder="password">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MonthlyFee, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.MonthlyFee, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.MonthlyFee)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_password">Monthly Fee</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="monthly_fee" name="monthly_fee" placeholder="mothly fee">
+                        </div>*@
+                    </div>
+
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ExaminationFee, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.ExaminationFee, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ExaminationFee)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_password">Examination Fee</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="examination_fee" name="examination_fee" placeholder="Examination fee">
+                        </div>*@
+                    </div>
+
+                    <div class="form-group-separator"></div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AdmissionFee, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.AdmissionFee, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.AdmissionFee)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_password">Admission Fee</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="admission_fee" name="admission_fee" placeholder="Admission fee">
+                        </div>*@
+                    </div>
+
+                    <div class="form-group-separator"></div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.OtherCharges, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.OtherCharges, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OtherCharges)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_password">Other Charges</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="other_charges" name="other_charges" placeholder="other charges">
+                        </div>*@
+                    </div>
+
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Discount, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Discount, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Discount)
+                        </div>
+                        @*<label class="col-sm-2 control-label" for="student_password">Discount</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="discount_amount" name="discount_amount" placeholder="discount amount">
+                        </div>*@
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group std-save-btn">
+                        <input type="submit" class=" btn btn-success" id="submit-form" value="Admit Student" />
+                    </div>
+               }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function Success() {
+        alert("okay Done")
+    }
+    function Begin() {
+
+    }
+    function Complete() {
+
+    }
+    function Failure() {
+
+    }
+
+    jQuery(document).ready(function () {
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#student_admission_form").validate({
+            rules: {
+                student_fname: {
+                    required: true
+                },
+                student_lname: {
+                    required: true
+                },
+                student_parent: {
+                    required: true
+                },
+                student_dob: {
+                    required: true
+                },
+                student_roll: {
+                    required: true
+                },
+                student_gender: {
+                    required: true
+                },
+                student_phone: {
+                    required: true
+                },
+                student_username: {
+                    required: true
+                },
+                student_password: {
+                    required: true
+                },
+                //student_school: {
+                //    required: true
+                //},
+                student_class: {
+                    required: true
+                },
+                monthly_fee: {
+                    required: true
+                }
+            },
+            messages: {
+                student_fname: {
+                    required: "Required student first name"
+                },
+                student_lname: {
+                    required: "Required student last name"
+                },
+                student_parent: {
+                    required: "Required student parent"
+                },
+                student_dob: {
+                    required: "Required student date of birth"
+                },
+                student_roll: {
+                    required: "Required student roll"
+                },
+                student_gender: {
+                    required: "Required student gender"
+                },
+                student_phone: {
+                    required: "Required student phone"
+                },
+                student_username: {
+                    required: "Required student username"
+                },
+                student_password: {
+                    required: "Required student password"
+                },
+                //student_school: {
+                //    required: "Required student school"
+                //},
+                student_class: {
+                    required: "Required student class"
+                },
+                monthly_fee: {
+                    required: "Required student Monthly fee"
+                }
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var action = $("#action-type").val();
+
+                var data = {
+                    first_name: $(form).find('#student_fname').val(),
+                    last_name: $(form).find('#student_lname').val(),
+                    birthday: $(form).find('#student_dob').val(),
+                    gender: $(form).find('#student_gender').val(),
+                    address: $(form).find('#student_address').val(),
+                    phone: $(form).find('#student_phone').val(),
+                    username: $(form).find('#student_username').val(),
+                    password: $(form).find('#student_password').val(),
+                    roll: $(form).find('#student_roll').val(),
+                    parent_id: $(form).find('#student_parent').val(),
+                    class_id: $(form).find('#student_class').val(),
+                    monthly_fee: $(form).find('#monthly_fee').val(),
+                    discount: $(form).find('#discount_amount').val()
+                };
+                var url = "/Student/Add";
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (resp) {
+                                    window.location.href = '/';
+                                }
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>

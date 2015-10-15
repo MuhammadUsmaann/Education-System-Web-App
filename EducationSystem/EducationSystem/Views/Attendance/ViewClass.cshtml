@@ -1,0 +1,137 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.StudentAttendance>
+@{
+    ViewBag.ModalName = "";
+    var isModel = false;
+    if (Model != null)
+    {
+        isModel = true;
+    }
+}
+<input type="hidden" value="@ViewBag.class_id" id="class-id-hidden" />
+<input type="hidden" value="@ViewBag.date" id="date-hidden" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Marks for subject
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                   @using (@Html.BeginForm("ViewClass", "Attendance",FormMethod.Get))
+                   {                    
+                       <div class="col-md-3">
+                            <select class="form-control" id="class_id" name="class_id">
+                                <option value="">Select Class</option>
+                                @foreach (var cls in ViewBag.classes)
+                                {
+                                    <option value="@cls.class_id">@cls.name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" placeholder="Attendance Date" class="form-control datepicker" id="attend_date" name="date" data-start-view="2">
+                        </div>
+                        <div class="col-md-2">
+                            <input class="btn" type="submit" value="Update Attendance" />
+                        </div>
+                   }
+                </div>
+                       
+            </div>
+        </div>
+    </div>
+@if(Model != null)
+{
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="atttendance-table-div col-md-12">
+
+                    <table id="example-1" class="table  table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="name">Name</th>
+                                @for (int x = 1; x <= ViewBag.Days; x++)
+                                {
+                                    <th class="day">@x</th>
+                                }
+                            </tr>
+                        </thead>
+                        @*<tfoot>
+                            <tr>
+                                <th class="name">Name</th>
+                                @for (int x = 1; x <= ViewBag.Days; x++)
+                                {
+                                    <th class="day">@x</th>
+                                }
+                            </tr>
+                        </tfoot>*@
+                        <tbody>
+
+                            @foreach (var std in Model)
+                            {
+                                <tr>
+                                    <td class="name">@std.student_name</td>
+
+                                    @{
+                                var attendance = std.AttendanceDays;
+                                    }
+
+                                    @foreach (var day in attendance)
+                                    {
+                                        if (day.status == EducationSystem.Models.AttendanceStatus.NONE)
+                                        { 
+                                            <td class="day"><i class="glyphicon glyphicon-minus"></i></td>
+                                        }
+                                        else if (day.status == EducationSystem.Models.AttendanceStatus.PRESENT) { 
+                                            <td class="day"><i class="glyphicon glyphicon-ok"></i></td>
+                                        }
+                                        else if (day.status == EducationSystem.Models.AttendanceStatus.ABSENT)
+                                        {
+                                            <td class="day"><i class="glyphicon glyphicon-remove"></i></td> 
+                                        }
+                                        
+                                    }
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+<script type="text/javascript">
+
+    var iModel = '@isModel'
+    var class_id = $("#class-id-hidden").val();
+
+    var date_h = $("#date-hidden").val();
+
+
+
+    jQuery(document).ready(function () {
+
+        $("#class_id").val(class_id);
+        $("#attend_date").val(date_h);
+
+        $(".datepicker").each(function (i, el) {
+              var $this = $(el),
+                opts = {
+                    format: attrDefault($this, 'format', 'MM yyyy'),
+                    startDate: attrDefault($this, 'startDate', ''),
+                    endDate: attrDefault($this, 'endDate', ''),
+                    daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+                    startView: attrDefault($this, 'startView', 0),
+                    rtl: rtl()
+                },
+                $n = $this.next(),
+                $p = $this.prev();
+            $this.datepicker(opts);
+        });
+    });
+</script>

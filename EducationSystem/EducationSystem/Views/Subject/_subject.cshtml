@@ -1,0 +1,221 @@
+﻿
+
+<div class="modal fade" id="subject-detail-modal">
+
+    <input type="hidden" id="action-type" value="add" class=""/>
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">subject Detail</h4>
+			</div>
+            <form id="subject_detail_form" class="validate"> 
+			<div class="modal-body">
+				<div class="row">
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Subject Name</label>
+                            <input type="text" class="form-control" name="subject_name" id="subject_name" placeholder="subject name">
+						</div>
+					</div>
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Teacher</label>
+                            <select class="form-control subject_teacher" name="subject_teacher" id="subject_teacher">
+                                <option value="">Select School</option>
+                                @foreach (var teacher in ViewBag.teachers_list)
+                                {
+                                    <option value="@teacher.user_id">@teacher.first_name  @teacher.last_name</option>   
+                                }
+							</select>
+						</div>
+					</div>
+                </div>
+                <div class="row">
+                    @*<div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">School</label>
+                            <select class="form-control subject_school" name="subject_school" id="subject_school">
+                                <option value="">Select School</option>   
+                                @foreach (var school in ViewBag.schools_list)
+                                {
+                                    <option value="@school.id">@school.name</option>   
+                                }
+							</select>
+						</div>
+					</div>*@
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="field-1" class="control-label">Class</label>
+                            <select class="form-control subject_class" name="subject_class" id="subject_class">
+                                <option value="">Select School</option>
+                                @foreach (var cls in ViewBag.classes_list)
+                                {
+                                    <option value="@cls.class_id">@cls.name</option>   
+                                }
+							</select>
+						</div>
+					</div>
+                </div>
+			</div>
+				
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-info" id="save-changes-id">Save changes</button>
+			</div>
+        </form>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#subject-modal-btn").click(function () {
+            $("#action-type").val("add");
+            jQuery('#subject-detail-modal').modal('show', { backdrop: 'static' });
+        });
+        $('#subject-detail-modal').on('hidden.bs.modal', function () {
+            $('#subject_name').val("");
+            $('#subject_teacher').val("");
+            //$('#subject_school').val("");
+            $('#subject_class').val("");
+        })
+
+        $("select.subject-action-type").change(function () {
+            var action = $(this).val();
+            if (action === "edit") {
+
+                $("#action-type").val("edit");
+                $("#action-type").addClass($(this).attr("id"));
+
+                $.ajax({
+                    url: "/subject/find",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            $('#subject_name').val(response.name);
+                            $('#subject_class').val(response.class_id);
+                            //$('#subject_school').val(response.school_id);
+                            $('#subject_teacher').val(response.teacher_id);
+                            jQuery('#subject-detail-modal').modal('show', { backdrop: 'static' });
+                        }
+                    }
+                });
+            }
+            else if (action == "delete") {
+                $("#action-type").addClass($(this).attr("id"));
+                $.ajax({
+                    url: "/subject/delete",
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: $(this).attr("id")
+                    },
+                    success: function (response) {
+                        if (response) {
+                            window.location.href = "/subject";
+                        }
+                    }
+                });
+            }
+        });
+
+        setTimeout(function () { $(".fade-in-effect").addClass('in'); }, 1);
+        // Validation and Ajax action
+        $("form#subject_detail_form").validate({
+            rules: {
+                subject_name: {
+                    required: true
+                },
+                subject_teacher: {
+                    required: true
+                },
+                subject_class: {
+                    required: true
+                },
+                //subject_school: {
+                //    required: true
+                //}
+            },
+
+            messages: {
+                subject_name: {
+                    required: 'Required subject name'
+                },
+                subject_teacher: {
+                    required: 'Required subject teacher'
+                },
+                //subject_school: {
+                //    required: 'Required subject school'
+                //},
+                subject_class: {
+                    required: 'Required subject class'
+                }
+            },
+            // Form Processing via AJAX
+            submitHandler: function (form) {
+                show_loading_bar(70); // Fill progress bar to 70% (just a given value)
+                var opts = {
+                    "closeButton": true,
+                    "debug": false,
+                    "positionClass": "toast-top-full-width",
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                var action = $("#action-type").val();
+
+                var data = {
+                    name: $(form).find('#subject_name').val(),
+                    class_id: $(form).find('#subject_class').val(),
+                    school: $(form).find('#subject_school').val(),
+                    teacher: $(form).find('#subject_teacher').val()
+                };
+
+                var url = "/Subject/";
+                if (action == "add") {
+                    url += "Add";
+                }
+                else if (action == "edit") {
+                    url += "Update";
+                    data.id = $("#action-type").attr("class");
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (resp) {
+                        show_loading_bar({
+                            delay: .5,
+                            pct: 100,
+                            finish: function () {
+                                if (resp) {
+                                    window.location.href = '/subject';
+                                }
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+        // Set Form focus
+        $("form#school_detail_form .form-group:has(.form-control):first .form-control").focus();
+    });
+</script>
+

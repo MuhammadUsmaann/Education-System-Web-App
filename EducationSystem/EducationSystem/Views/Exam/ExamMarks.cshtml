@@ -1,0 +1,145 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.SubjectExam>
+@{
+    ViewBag.ModalName = "";
+    var isModel = false;
+    if (Model != null)
+    {
+        isModel = true;
+    }
+}
+<input type="hidden" value="@ViewBag.class_id" id="class-id-hidden"/>
+<input type="hidden" value="@ViewBag.subject_id" id="subject-id-hidden"/>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Marks for subject
+			</div>
+						
+			<div class="panel-body">
+		    @using (@Html.BeginForm("ExamMarks", "Exam", FormMethod.Get))
+            {
+				<div class="row">
+					<div class="col-md-4">
+                        <select class="form-control" name="class_id" id="class_id">
+                            <option value="">Select Class</option>
+                            @foreach (var cls in ViewBag.classes)
+                            {
+                                <option value="@cls.class_id">@cls.name</option>
+                            }
+                        </select>
+					</div>
+					<div class="col-md-4">
+                        <select class="form-control" name="subject_id" id="subject_id">
+                            <option value="">Select Subject</option>
+                        </select>
+					</div>
+					<div class="col-md-2">
+						<input type="submit"	class="btn" id="manage-exam-marks-btn" value="Manage Exam Marks"/>
+					</div>
+				</div>
+            }
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Exam Type list</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div role="form" class="form-horizontal">
+                        @if (Model != null)
+                        {
+                            foreach (var exam in Model)
+                            {
+                                <div class="form-group subject-detail">
+                                    <input type="hidden" id="subject-id-value" value="@exam.id" /> 
+							        <label class="col-sm-2 control-label" for="field-1">@exam.exam_name</label>
+							        <div class="col-sm-3">
+								        <input type="number" class="form-control" id="subject-marks" value="@exam.marks" placeholder="Subject Marks">
+							        </div>
+							        <div class="col-sm-5">
+								        <input type="text" class="form-control" id="subject-comment" value="@exam.comment" placeholder="Comment">
+							        </div>
+							        <div class="col-sm-2">
+								        <input type="button" class="btn btn-secondary subject-update-btn" value="Update" />
+							        </div>
+						        </div>
+                            }
+                        }
+                        else
+                        {
+                            <h1>Please select to see the exams type and marks</h1>
+                        }
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    var subjects = @Html.Raw(@ViewBag.subjects)
+    var iModel = '@isModel'
+    var class_id = $("#class-id-hidden").val();
+    jQuery(document).ready(function () {
+        if (iModel === 'True')
+        {
+            $("#subject_id").html('');
+            $("#subject_id").html('<option value="">Select Subject</option>');
+            for (var x = 0 ; x < subjects.length ; x++)
+            {
+                if (subjects[x].class_id == class_id)
+                {
+                    $("#subject_id").append('<option value="' + subjects[x].subject_id + '">' + subjects[x].name + '</option>');
+                }
+            }
+        }
+        $("#subject_id").val($("#subject-id-hidden").val());
+        $("#class_id").val(class_id);
+        
+        $(".subject-update-btn").click(function () {
+            var parent = $(this).closest(".subject-detail");
+
+            var data = {
+                marks : $(parent).find("#subject-marks").val(),
+                comment : $(parent).find("#subject-comment").val(),
+                id : $(parent).find("#subject-id-value").val()
+            };
+            
+            $.ajax({
+                url: "/Exam/UpdateExamMarks",
+                method: 'POST',
+                dataType: 'json',
+                data: data,
+                success: function (response) {
+                    if (response) {
+                        alert("Done dna done");
+                    }
+                }
+            });
+
+        });
+        //Loop through statesAvailable
+
+        $("#class_id").change(function () {
+            var class_id = $(this).val();
+
+            $("#subject_id").html('');
+
+            $("#subject_id").html('<option value="0">Select Subject</option>');
+
+            for (var x = 0 ; x < subjects.length ; x++)
+            {
+                if (subjects[x].class_id == class_id)
+                {
+                    console.log(subjects[x].class_id + "---" + class_id);
+                    $("#subject_id").append('<option value="' + subjects[x].subject_id + '">' + subjects[x].name + '</option>');
+                }
+            }
+        });
+    });
+</script>

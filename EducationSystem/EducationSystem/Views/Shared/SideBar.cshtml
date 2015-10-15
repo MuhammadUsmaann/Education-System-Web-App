@@ -1,0 +1,236 @@
+﻿@{
+    var rolecode = EducationSystem.Models.SessionHandler.GetRoleCode();
+}
+<div class="sidebar-menu toggle-others fixed">
+			
+	<div class="sidebar-menu-inner">	
+				
+		<header class="logo-env">
+					
+			<!-- logo -->
+			<div class="logo">
+				<a href="/" class="logo-expanded">
+					<span style="color:white;font-size:24px;">CHRON LABZ</span>
+				</a>
+						
+				<a href="/" class="logo-collapsed">
+					<img src="~/Images/logo-collapsed@2x.png" width="40" alt="" />
+				</a>
+			</div>
+					
+			<!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+			<div class="mobile-menu-toggle visible-xs">
+				<a href="#" data-toggle="user-info-menu">
+					<i class="fa-bell-o"></i>
+					<span class="badge badge-success">7</span>
+				</a>
+						
+				<a href="#" data-toggle="mobile-menu">
+					<i class="fa-bars"></i>
+				</a>
+			</div>
+					
+			<!-- This will open the popup with user profile settings, you can use for any purpose, just be creative -->	
+		</header>
+		<ul id="main-menu" class="main-menu">
+			<!-- add class "multiple-expanded" to allow multiple submenus to open -->
+			<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+		    @if (rolecode == EducationSystem.Models.RoleCode.OWNER)
+            {
+                <li>
+                    <a href="/school">
+					    <i class="linecons-cog"></i>
+					    <span class="title">School</span>
+				    </a>
+			    </li> 
+            }
+             
+            @if (rolecode == EducationSystem.Models.RoleCode.STUDENT)
+            {
+                <li>
+                    <a href="/attendance/my">
+                        <i class="linecons-cog"></i>
+                        <span class="title">Attendance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/fee/my">
+                        <i class="linecons-cog"></i>
+                        <span class="title">fee Detail</span>
+                    </a>
+                </li>
+            }
+            else if (rolecode == EducationSystem.Models.RoleCode.PARENT)
+            {
+                 <li>
+                    <a href="/attendance/kid">
+                        <i class="linecons-cog"></i>
+                        <span class="title">Attendance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/fee/kid">
+                        <i class="linecons-cog"></i>
+                        <span class="title">Fee Detail</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+			    <li>
+				    <a href="javascript:;">
+					    <i class="linecons-params"></i>
+					    <span class="title">Exam</span>
+				    </a>
+                    <ul>
+					    <li>
+						    <a href="/exam">
+							    <span class="title">All Exam</span>
+						    </a>
+					    </li>
+                        <li>
+						    <a href="/exam/exammarks">
+							    <span class="title">Add Exam Type</span>
+						    </a>
+					    </li>
+                        <li>
+						    <a href="/exam/studentmarks">
+							    <span class="title">Update Student Exam Marks</span>
+						    </a>
+					    </li>
+                    </ul>
+			    </li>
+                <li>
+                    <a href="#">
+                        <i class="linecons-globe"></i>
+                        <span class="title">Attendance</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/attendance/viewclass">
+                                <span class="title">View Class</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/attendance/markclass">
+                                <span class="title">Mark Class</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/attendance/viewstudent">
+                                <span class="title">View Student</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/attendance/editstudent">
+                                <span class="title">Mark Edit</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            if (rolecode == EducationSystem.Models.RoleCode.ADMIN)
+            {
+                <li>
+                    <a href="#">
+                        <i class="linecons-globe"></i>
+                        <span class="title">Payments</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/fee">
+                                <span class="title">Fee Struture</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/fee/student-fee">
+                                <span class="title">Student Fee</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/fee/single-report">
+                                <span class="title">Single Student Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/fee/class-report">
+                                <span class="title">Class Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/fee/family-report">
+                                <span class="title">Family Report</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li> 
+                <li>
+                    <a href="#">
+                        <i class="linecons-globe"></i>
+                        <span class="title">Settings</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="/Session">
+                                <span class="title">Sessions</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/setting/viewprofile">
+                                <span class="title">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/setting/changepassword">
+                                <span class="title">Change password</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="linecons-cog"></i>
+                                <span class="title">Students</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/student">
+                                        <span class="title">All student</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/student/add">
+                                        <span class="title">Add Student</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/parent">
+                                <span class="title">Partents</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/teacher">
+                                <span class="title">Teachers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/class">
+                                <span class="title">Class</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/subject">
+                                <span class="title">Subject</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+                
+            }
+
+
+            
+		</ul>					
+	</div>
+			
+</div>

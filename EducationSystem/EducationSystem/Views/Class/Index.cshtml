@@ -1,0 +1,78 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.Class>
+@{
+    ViewBag.ModalName = "class";
+}
+<div class="page-title">
+	<div class="title-env">
+		<h1 class="title">class</h1>
+		<p class="description">The Class detail can modify here</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h3 class="panel-title">Class list</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="javascript:;" id="class-modal-btn" class="btn ">Add class</a>
+                        <a href="javascript:;" id="delete-teacher-modal-btn" class="btn">Delete</a>
+                    </div>
+                </div>
+            </div>
+			<div class="panel-body">		
+                <table class="table table-bordered table-striped" id="table-format-default">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="cbr"/></th>
+                            <th>Sr#</th>
+                            <th>Name</th>
+                            <th>Number</th>
+                            <th>Teacher</th>
+                            <th>School</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="middle-align">
+
+                        @{
+                            var count = 1;   
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" value="@item.class_id" class="cbr" />
+                                </td>
+                                <td>@count</td>
+                                <td>
+                                    @Html.DisplayFor(m => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.numeric_num)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.teacher_name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.school_name)
+                                </td>
+                                <td>
+                                    <a href="javascript:;" class="btn action-edit-link"  id="@item.class_id">Edit</a>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section modals{
+    @Html.Partial("~/Views/Class/_class.cshtml", null)
+}

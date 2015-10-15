@@ -1,0 +1,302 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.StudentFee>
+
+<div class="page-title">
+    <div class="title-env">
+        <h1 class="title">Fee Detail</h1>
+        <p class="description">Student Fee detail</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Marks for subject
+            </div>
+
+            <div class="panel-body">
+                @using (@Html.BeginForm("student-fee", "Fee", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control" name="class_id" id="class_id">
+                                <option value="">Select Class</option>
+                                @foreach (var cls in ViewBag.classes)
+                                {
+                                    <option value="@cls.class_id">@cls.name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" name="student_id" id="student_id">
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn" value="View Student Fee">
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+ </div>
+@if (ViewBag.isSelected != null && ViewBag.isSelected == true)
+{
+        var student = (EducationSystem.Models.Entities.Student)ViewBag.student;
+ 
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@student.full_name</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div>@student.full_name</div>
+                        <div>S/D/O @student.parent_name</div>
+                        <div>S/D/O @student.class_name</div>
+                    </div>
+                    
+                </div>
+                    <div class="row">
+                        @using (Ajax.BeginForm("studentFee", "Fee", null, new AjaxOptions
+                                                                            {
+                                                                                HttpMethod = "post",
+                                                                                OnSuccess = "Success",
+                                                                                OnBegin = "Begin",
+                                                                                OnFailure = "Failure",
+                                                                                OnComplete = "Complete"
+                                                                            }))
+                        {
+                            <input type="hidden" value="@ViewBag.student_id" name="s_id"/>
+                            <input type="hidden" value="@ViewBag.class_id" name="c_id"/>
+                            
+                            <div class="col-sm-12">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Month</th>
+                                            <th>fee</th>
+                                            <th>Paid</th>
+                                            <th>Paid Month</th>
+                                            <th><input type="checkbox" class="cf" /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (Model != null && Model.Count() != 0)
+                                        {
+                                            var count = 0;
+                                            var statusValue = "";
+                                            foreach (var fee in Model)
+                                            {
+                                                var id = "stdfee[" + count.ToString() + "].student_fee_id";
+                                                var clas_id = "stdfee[" + count.ToString() + "].class_id";
+                                                var student_id = "stdfee[" + count.ToString() + "].student_id";
+                                                var paid_month_name = "stdfee[" + count.ToString() + "].paid_date";
+
+                                                var status_temp = false;
+                                                if (fee.paid_status == EducationSystem.Models.FeePaidStatus.PAID)
+                                                {
+                                                    status_temp = true;
+                                                }
+                                                <input type="hidden" name="@clas_id" value="@fee.class_id" />
+                                                <input type="hidden" name="@id" value="@fee.student_fee_id" />
+                                                
+                                                <tr class="fee-detail-tr">
+                                                    <td>@(count+1)</td>
+                                                    <td>@fee.month</td>
+                                                    <td>@student.monthly_fee</td>
+                                                    @if (status_temp)
+                                                    {
+                                                        <td><span class="add-on"><i class="glyphicon glyphicon-ok"></i></span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><span class="add-on"><i class="glyphicon glyphicon-remove"></i></span></td>
+                                                    }
+
+                                                    <td>
+                                                        <div class="input-append date datepickerMonthFee" id="datepicker" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd-mm-yyyy">
+                                                            <input class="span2" size="16" type="text" data-bind="value: Customer.DateOfBirth" name="@paid_month_name" value="@fee.paid_date" readonly="readonly" />
+                                                            <span class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                        </div>
+                                                    </td>
+
+                                                    @{
+                                                        statusValue = "stdfee[" + @count.ToString() + "].status";
+                                                    }
+                                                    <td>@Html.CheckBox(statusValue, status_temp, new {@data_role=@fee.fee, @id = statusValue, @class = "checkingB paid_fee cbr" })</td>
+
+                                                </tr>
+                                               count++;
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-12">
+                                @if (ViewBag.add_fee != null){
+                                    var count = 0;
+
+                                    foreach (EducationSystem.Models.Entities.StudentFee sf in ViewBag.add_fee)
+                                    {
+                                        var fee_name = "";
+                                        var fee_amount = 0;
+                                        var status = false;
+                                        
+                                        fee_amount = sf.fee;
+                                        var statusValue = "stdAdd[" + count.ToString() + "].status";
+                                        var idName = "stdAdd[" + count.ToString() + "].student_fee_id";
+                                        var clas_idad = "stdAdd[" + count.ToString() + "].class_id";
+                                        var student_idad = "stdAdd[" + count.ToString() + "].student_id";
+                                        
+                                        count++;
+
+                                        if (sf.paid_status == EducationSystem.Models.FeePaidStatus.PAID)
+                                        {
+                                            status = true;
+                                        }
+                                        
+                                        if (sf.type == EducationSystem.Models.FeeType.ADMISSION_FEE)
+                                        {
+                                            fee_name = "Admission Fee";
+                                        }
+                                        else if (sf.type == EducationSystem.Models.FeeType.EXAMINATION_FEE)
+                                        {
+                                            fee_name = "Examination Fee";
+                                        }
+                                        else if (sf.type == EducationSystem.Models.FeeType.OTHER_CHARGES)
+                                        {
+                                            fee_name = "Other Charges";
+                                        }
+                                     
+                                        <div>@fee_name ---- @sf.fee 
+                                        
+                                            <input type="hidden" name="@student_idad" value="@sf.student_id" />
+                                            <input type="hidden" name="@clas_idad" value="@sf.class_id" />
+                                            <input type="hidden" name="@idName" value="@sf.student_fee_id" />
+
+                                            @Html.CheckBox(statusValue, status, new { @id = statusValue, @class = "checkingB paid_fee cbr", @data_role = @sf.fee })
+                                            
+                                        </div>   
+                                    }
+                                    
+                                }
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="number" value="@ViewBag.discount" id="discount-amount" name="discount" placeholder="Discount Amount" />
+                                <input type="number" readonly value="@ViewBag.total" id="total_amount" name="total" placeholder="Total Amount"/>
+                            </div>
+                            <input type="submit" class="btn" value="Update" />
+                            <input type="button" id="delete-all-fee" class="btn" value="Delete" />
+                    }
+                    </div>
+                    <div class="vspacer v3"></div>
+                </div>
+        </div>
+    </div>
+</div>
+}
+
+<script>
+    var subjects = @Html.Raw(@ViewBag.students)
+    var class_id = @ViewBag.class_id
+    var student_id = @ViewBag.student_id
+
+    jQuery(document).ready(function () {
+    
+        $("#class_id").change(function () {
+            var class_id = $(this).val();
+
+            $("#student_id").html('');
+
+            $("#student_id").html('<option value="">Select Subject</option>');
+
+            for (var x = 0 ; x < subjects.length ; x++)
+            {
+                if (subjects[x].class_id == class_id)
+                {
+                    $("#student_id").append('<option value="' + subjects[x].id + '">' + subjects[x].fullname+ '</option>');
+                }
+            }
+
+            $("#student_id").val(student_id);
+        });
+        if(class_id != "")
+        {
+            $("#class_id").trigger("change");
+        }
+
+
+        var checkboxes = $(".checkingB");
+
+        $.each(checkboxes,function (index,val) {
+            var name = $(val).attr('name');
+
+            var atttr = $("input[name='" + name + "']");
+
+            $.each(atttr, function (index, hidden) {
+                if ($(hidden).attr("type") === "hidden") {
+                    $(hidden).remove();
+                }
+            })
+        });
+
+        $.each(checkboxes,function (index,val){
+            
+            $(this).change(function(){
+                var checked = $(this).val();
+                var amount =parseInt( $(this).attr("data-role"));
+                var total =parseInt($("#total_amount").val());
+
+                if(!$(this).prop('checked'))
+                {
+                    amount = -amount;
+                }
+
+                $("#total_amount").val(total + amount);    
+            });
+            
+        });
+
+        $("#delete-all-fee").click(function(){
+            data = {s_id : student_id, c_id: class_id};
+            url = "/fee/delete";
+            ajaxCall(url,data,function(response){
+                if(response)
+                {
+                    alert("okay done");
+                }
+            })
+
+        });
+        $("#discount-amount").change(function(){
+            var discount =parseInt( $(this).val());
+            var total =parseInt($("#total_amount").val());
+
+            if(discount < 0)
+            {
+                discount = 0;
+            }
+            else
+            {
+                discount = -discount;
+            }
+            $("#total_amount").val(total + discount);    
+        });
+
+    });
+    
+    function Success(data) {
+        alert("Attendance Marked");
+    }
+    function Begin() {
+        
+    }
+    function Complete() {
+        
+    }
+</script>

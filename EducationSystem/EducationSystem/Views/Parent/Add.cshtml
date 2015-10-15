@@ -1,0 +1,164 @@
+﻿@model EducationSystem.Models.View.ParentModelView
+@{
+    string actionURL = "add";
+    if (ViewBag.actionURL != null)
+    {
+        actionURL = ViewBag.actionURL;
+    }
+}
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add Parent</h3>
+            </div>
+            <div class="panel-body">
+@using (Ajax.BeginForm(actionURL, "parent", null, new AjaxOptions
+                                                            {
+                                                                HttpMethod = "post",
+                                                                OnSuccess = "Success",
+                                                                OnBegin = "Begin",
+                                                                OnFailure = "Failure",
+                                                                OnComplete = "Complete"
+                                                            }, new { @class = "form-horizontal validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    if (actionURL == "edit")
+{
+    <input type="hidden" value="@ViewBag.id" name="id" />
+}
+                   <div class="form-group">
+                       <label class="col-sm-4 control-label" for="gardian_fname">Gardian First Name</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.GardianFirstName, new { @class = "form-control", @placeholder = "first name" })
+                            @Html.ValidationMessageFor(m => m.GardianFirstName)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+ 
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="gardian_lname">Gardian Last name</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.GardianLastName, new { @class = "form-control", @placeholder = "last name" })
+                            @Html.ValidationMessageFor(m => m.GardianLastName)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="student_fname">Parent First Name</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.ParentFirstName, new { @class = "form-control", @placeholder = "first name" })
+                            @Html.ValidationMessageFor(m => m.ParentFirstName)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+ 
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="student_lname">Parent Last name</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.ParentLastName, new { @class = "form-control", @placeholder = "last name" })
+                            @Html.ValidationMessageFor(m => m.ParentLastName)
+
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="mother_name">Mohter Name</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", @placeholder = "Mother name" })
+                            @Html.ValidationMessageFor(m => m.MotherName)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="mother_name">CNIC Number</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.CNICNumber, new { @class = "form-control", @placeholder = "CNIC Number" })
+                            @Html.ValidationMessageFor(m => m.CNICNumber)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="parent_profession">Profession</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Profession, new { @class = "form-control", @placeholder = "Profession" })
+                            @Html.ValidationMessageFor(m => m.Profession)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="parent_income">Income</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Income, new { @class = "form-control", @placeholder = "Income" })
+                            @Html.ValidationMessageFor(m => m.Income)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="parent_phone">Phone Number</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "Phone Number" })
+                            @Html.ValidationMessageFor(m => m.Phone)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="parent_lan">Phone Number</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Landline, new { @class = "form-control", @placeholder = "Landline Number" })
+                            @Html.ValidationMessageFor(m => m.Landline)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="student_lname">Email</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "Email" })
+                            @Html.ValidationMessageFor(m => m.EmailAddress)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="student_lname">Password</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="student_lname">Address</label>
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                            @Html.ValidationMessageFor(m => m.Address)
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group std-save-btn">
+                        <input type="submit" class=" btn btn-success" id="submit-form" value="Add Parent" />
+                    </div>
+}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Success() {
+        alert("okay Done")
+    }
+    function Begin() {
+
+    }
+    function Complete() {
+
+    }
+    function Failure() {
+
+    }
+</script>

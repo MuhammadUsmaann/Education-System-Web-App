@@ -1,0 +1,120 @@
+﻿@model IEnumerable<EducationSystem.Models.Entities.Users_detail>
+@{
+    ViewBag.Title = "Viewprofile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var imagePath = @Model.FirstOrDefault().image;
+}
+@foreach (var item in Model)
+{ 
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">View Profile</h3>
+            </div>
+            <div class="panel-body">
+                @*<form id="student_admission_form" role="form" class="form-horizontal validate">*@
+
+
+                <div class="form-group">
+                    <h3 class="col-sm-4 control-label">@Html.DisplayFor(p => item.last_name, new { @class = "form-control" }) </h3>
+
+                    <div class="col-sm-5 ">
+                        <img src="@Url.Content(imagePath)" alt="Image" width="200" height="200" style="width:200px;height:200px " />
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator" style="clear:both;"></div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(p=>item.first_name, new { @class = "col-sm-4 control-label" })
+                       
+                        <div class="col-sm-5 " >
+                            @Html.DisplayFor(p => item.first_name, new { @class = "form-control" })
+                           @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(p => item.middle_name, new { @class = "col-sm-4 control-label" })
+
+                    <div class="col-sm-5 ">
+                        @Html.DisplayFor(p => item.middle_name, new { @class = "form-control" })
+                        @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator"></div>
+
+                <div class="form-group">
+                    @Html.LabelFor(p => item.last_name, new { @class = "col-sm-4 control-label" })
+
+                    <div class="col-sm-5 ">
+                        @Html.DisplayFor(p => item.last_name, new { @class = "form-control" })
+                        @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator"></div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(p => item.phone, new { @class = "col-sm-4 control-label" })
+
+                    <div class="col-sm-5 ">
+                        @Html.DisplayFor(p => item.phone, new { @class = "form-control" })
+                        @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator"></div>
+
+                <div class="form-group">
+                    @Html.LabelFor(p => item.profession, new { @class = "col-sm-4 control-label" })
+
+                    <div class="col-sm-5 ">
+                        @Html.DisplayFor(p => item.profession, new { @class = "form-control" })
+                        @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator"></div>
+
+                <div class="form-group">
+                    @Html.LabelFor(p => item.address, new { @class = "col-sm-4 control-label" })
+
+                    <div class="col-sm-5 ">
+                        @Html.DisplayFor(p => item.address, new { @class = "form-control" })
+                        @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator"></div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(p => item.other_detail, new { @class = "col-sm-4 control-label" })
+
+                    <div class="col-sm-5 ">
+                        @Html.DisplayFor(p => item.other_detail, new { @class = "form-control" })
+                        @* <input type="text" class="form-control" name="student_fname" id="student_fname" placeholder="First name">*@
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group-separator"></div>
+
+                <div class="col-sm-8 col-sm-offset-4">
+                   @Html.ActionLink("Update Profile", "UpdateProfile", "Setting")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+

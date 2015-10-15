@@ -1,0 +1,99 @@
+﻿
+<div class="modal fade" id="student-atnd-modal">
+    <input type="hidden" id="attendance_id" value="" />
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@EducationSystem.Models.SessionHandler.GetUserFullName()'s Attendance</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Status</label>
+                            <input class="form-control datepickerMonth" name="status" id="status_select" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-info" id="save-changes-btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        $(".edit-student-attendance").click(function () {
+
+            var std_id = $("#student-id-hidden").val();
+            var date = $(this).closest('.student-attendance').find("#student-attendance-date").val();
+            var class_id = $("#class-id-hidden").val();
+
+            $.ajax({
+                url: "/attendance/find",
+                method: 'POST',
+                dataType: 'json',
+                data: { s_id: std_id, date: date, class_id: class_id },
+                success: function (resp) {
+                    show_loading_bar({
+                        delay: .5,
+                        pct: 100,
+                        finish: function () {
+                            if (resp) {
+                                if (resp != false && resp != null) {
+                                    $("#attendance_id").val(resp.attendance_id + "");
+                                    $('#atnd_status_select').val(resp.status + "");
+                                }
+                                else {
+                                    $("#attendance_id").val("-1");
+                                    $('#atnd_status').val(@EducationSystem.Models.AttendanceStatus.NONE);
+                                }
+                                jQuery('#student-atnd-modal').modal('show', { backdrop: 'static' });
+                            }
+                        }
+                    });
+                },
+            });
+        });
+        $('#student-atnd-modal').on('hidden.bs.modal', function () {
+            $('#atnd_status').val(@EducationSystem.Models.AttendanceStatus.NONE);
+        });
+
+        $("#save-changes-btn").click(function () {
+
+            alert("Done");
+            var atnd = $("#attendance_id").val();
+            var status = $('#atnd_status_select').val();
+
+            $.ajax({
+                url: "/attendance/update",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id: atnd,
+                    status: status
+                },
+                success: function (response) {
+                    show_loading_bar({
+                        delay: .5,
+                        pct: 100,
+                        finish: function () {
+                            if (response) {
+                                alert("okay"); location.reload();
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    });
+</script>
+
